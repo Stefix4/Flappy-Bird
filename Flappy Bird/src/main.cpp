@@ -7,8 +7,6 @@ int main(void)
     const int screenHeight = 500;
     bool isFullscreen = false;
 
-    Rectangle fullscreenButton = { 10, 10, 120, 40 };
-
     InitWindow(screenWidth,screenHeight, "Flappy Bird");
 
     Image logo = LoadImage("../resources/flappy-bird-logo.png");
@@ -21,7 +19,7 @@ int main(void)
 
     while (!WindowShouldClose())    
     {
-        if (IsKeyPressed(KEY_F11) || CheckCollisionPointRec(GetMousePosition(), fullscreenButton) && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)){
+        if (IsKeyPressed(KEY_F11)){
             isFullscreen = !isFullscreen;
         
         if(isFullscreen)
