@@ -1,12 +1,28 @@
 #include "raylib.h"
-
+const float gravity=3.0f;
 int main(void)
 {
-
+    int a=0;
     const int screenWidth = 900;
     const int screenHeight = 500;
     bool isFullscreen = false;
     Rectangle screen = {0,0,900,500};
+    struct bird{
+        float velocity=0.0f;
+        float position=GetScreenHeight()/2.0f-79;
+
+        void update(){
+            position+=gravity;
+        };
+
+        void flap(){
+            position -=gravity;
+        };
+    
+    };
+
+
+
 
     //set up the window
     InitWindow(screenWidth,screenHeight, "Flappy Bird");
@@ -19,10 +35,22 @@ int main(void)
     SetWindowIcon(logo);
     SetWindowMinSize(screenWidth,screenHeight);
     HideCursor();
+    bird fbf;
+
+
 
     //game loop
     while (!WindowShouldClose())    
-    {
+    {   if(IsKeyPressed(KEY_SPACE)||a>=1&&a<=50){
+            fbf.flap();
+            a++;
+        }
+        else
+            if(fbf.position<GetScreenHeight()-140){
+                fbf.update();
+                a=0;
+            }   
+
         if (IsKeyPressed(KEY_F11)){
             isFullscreen = !isFullscreen;
         
@@ -38,8 +66,8 @@ int main(void)
 
             ClearBackground(RAYWHITE);
             DrawTexture(background,0,0,WHITE);
-            DrawTexture(fb,screenWidth/2,screenHeight/2,WHITE);
-            DrawTexture(pill1,screenWidth/2,screenHeight/2,WHITE);
+            DrawTexture(fb,screenWidth/4-104,fbf.position,WHITE);
+            //DrawTexture(pill1,screenWidth/2,screenHeight/2,WHITE);
 
         EndDrawing();
 
