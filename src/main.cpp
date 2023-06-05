@@ -48,10 +48,10 @@ int main(void)
     InitWindow(screenWidth,screenHeight, "Flappy Bird");
     SetTargetFPS(144); 
 
-    Image logo = LoadImage("../resources/flappy-bird-logo.png");
-    Texture2D fb = LoadTexture("../resources/flappy-bird-photo-removebg-preview.png");// fb = flappy bird 
-    Texture2D background = LoadTexture("../resources/background.png");
-    Texture2D pill1 = LoadTexture("../resources/pillar-1.png");
+    Image logo = LoadImage("./resources/flappy-bird-logo.png");
+    Texture2D fb = LoadTexture("./resources/flappy-bird-photo-removebg-preview.png");// fb = flappy bird 
+    Texture2D background = LoadTexture("./resources/background.png");
+    Texture2D pill1 = LoadTexture("./resources/pillar-1.png");
     SetWindowIcon(logo);
     SetWindowMinSize(screenWidth,screenHeight);
     HideCursor();
