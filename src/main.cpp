@@ -2,6 +2,23 @@
 
 const float gravity=3.0f;
 
+
+void ToggleFullScreenWindow(int windowWidth , int windowHeight)
+{
+    if(!IsWindowFullscreen())
+    {
+        int monitor = GetCurrentMonitor();
+        SetWindowSize(GetMonitorWidth(monitor), GetMonitorHeight(monitor));
+        ToggleFullscreen();
+    }
+    else
+    {
+        ToggleFullscreen();
+        SetWindowSize(windowWidth,windowHeight);
+    }
+
+}
+
 int main(void)
 {
     int a=0;
@@ -27,9 +44,6 @@ int main(void)
     
     };
 
-
-
-
     //set up the window
     InitWindow(screenWidth,screenHeight, "Flappy Bird");
     SetTargetFPS(144); 
@@ -42,9 +56,6 @@ int main(void)
     SetWindowMinSize(screenWidth,screenHeight);
     HideCursor();
     bird fbf;
-
-
-
     //game loop
     while (!WindowShouldClose())    
     {   if(IsKeyPressed(KEY_SPACE)||a>=1&&a<=50){
@@ -56,18 +67,9 @@ int main(void)
             if(fbf.position<GetScreenHeight()-140){
                 fbf.update();
                 a=0;
-            } 
-
-        if (IsKeyPressed(KEY_F11)){
-            isFullscreen = !isFullscreen;
-        
-        if(isFullscreen)
-            ToggleFullscreen();
-        else{
-            SetWindowSize(screenWidth, screenHeight);
-            ToggleFullscreen();
-        }
-        }
+            }
+        if (IsKeyPressed(KEY_F11))
+                ToggleFullScreenWindow(screenWidth,screenHeight);
 
         BeginDrawing();
 
