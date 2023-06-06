@@ -1,22 +1,7 @@
 #include <raylib.h>
 #include "movement.hpp"
+#include "fullscreen.hpp"
 
-
-void ToggleFullScreenWindow(int windowWidth , int windowHeight)
-{
-    if(!IsWindowFullscreen())
-    {
-        int monitor = GetCurrentMonitor();
-        SetWindowSize(GetMonitorWidth(monitor), GetMonitorHeight(monitor));
-        ToggleFullscreen();
-    }
-    else
-    {
-        ToggleFullscreen();
-        SetWindowSize(windowWidth,windowHeight);
-    }
-
-}
 
 int main(void)
 {
@@ -49,7 +34,6 @@ int main(void)
         DrawTexture(background, 0, 0, WHITE);
         drawing();
         //DrawTexture(pill1,screenWidth/2,screenHeight/2,WHITE);
-
         EndDrawing();
     }
 
