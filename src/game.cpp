@@ -23,15 +23,13 @@ int main(void)
     HideCursor();
     //game loop
     while (!WindowShouldClose())
-    {   
+    {
         birdJump();
         if (IsKeyPressed(KEY_F11))
                 ToggleFullScreenWindow(screenWidth, screenHeight);
 
         BeginDrawing();
-
         ClearBackground(RAYWHITE);
-        DrawTexture(background, 0, 0, WHITE);
         drawing();
         //DrawTexture(pill1,screenWidth/2,screenHeight/2,WHITE);
         EndDrawing();
