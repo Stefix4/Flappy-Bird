@@ -1,6 +1,7 @@
 #include <raylib.h>
 #include "movement.hpp"
 #include "fullscreen.hpp"
+#include "mainMenu.hpp"
 
 
 int main(void)
