@@ -2,6 +2,9 @@
 #include "movement.hpp"
 #include "mainMenu.hpp"
 
+MenuState currentMenuState = MenuState::PLAY;
+bool 
+
 int main(void)
 {
     const int screenWidth = 900;
@@ -19,16 +22,17 @@ int main(void)
     Texture2D pill1 = LoadTexture("./resources/pillar-1.png");
     SetWindowIcon(logo);
     SetWindowMinSize(screenWidth,screenHeight);
-    HideCursor();
     //game loop
     while (!WindowShouldClose())
     {
-        birdJump();
+        //if(/){
         BeginDrawing();
         ClearBackground(RAYWHITE);
+        birdJump();
         drawing();
         //DrawTexture(pill1,screenWidth/2,screenHeight/2,WHITE);
         EndDrawing();
+    //}
     }
 
     CloseWindow();        

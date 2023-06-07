@@ -1,5 +1,4 @@
 #include "mainMenu.hpp"
 
-enum class MenuState { PLAY, CONTRLOS, EXIT };
-MenuState currentMenuState = MenuState::PLAY;
+enum class MenuState { PLAY=1, CONTRLOS=2, EXIT=3 };
 
