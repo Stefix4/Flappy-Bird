@@ -1,8 +1,6 @@
 #include <raylib.h>
 #include "movement.hpp"
-#include "fullscreen.hpp"
 #include "mainMenu.hpp"
-
 
 int main(void)
 {
@@ -26,9 +24,6 @@ int main(void)
     while (!WindowShouldClose())
     {
         birdJump();
-        if (IsKeyPressed(KEY_F11))
-                ToggleFullScreenWindow(screenWidth, screenHeight);
-
         BeginDrawing();
         ClearBackground(RAYWHITE);
         drawing();
