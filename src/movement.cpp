@@ -1,6 +1,8 @@
+#include "movement.hpp"
+
 #include <iostream>
 #include <raylib.h>
-#include "movement.hpp"
+
 
 int a = 0;
 
@@ -25,7 +27,7 @@ struct bird{
 bird fbf;
 
 void birdJump(){
-    if(IsKeyPressed(KEY_SPACE)||a>=1&&a<=50){
+    if(IsKeyPressed(KEY_SPACE)||a>=1 && a<=50){
             fbf.flap();
             a++;
             fbf.position +=1+a/5;
@@ -38,8 +40,6 @@ void birdJump(){
 }
 
 void drawing(){
-
-    Texture2D fb = LoadTexture("./resources/flappy-bird-photo-removebg-preview.png");// fb = flappy bird 
+    Texture2D fb = LoadTexture("./resources/flappy-bird.png");// fb = flappy bird
     DrawTexture(fb, GetRenderWidth() / 4 - 104, fbf.position, WHITE);
-
 }
