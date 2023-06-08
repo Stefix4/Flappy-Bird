@@ -3,14 +3,11 @@
 #include "mainMenu.hpp"
 
 MenuState currentMenuState = MenuState::PLAY;
-bool 
 
 int main(void)
 {
     const int screenWidth = 900;
     const int screenHeight = 500;
-    bool isFullscreen = false;
-    Rectangle screen = {0,0,900,500};
 
     //set up the window
     InitWindow(screenWidth,screenHeight, "Flappy Bird");
@@ -24,17 +21,14 @@ int main(void)
     SetWindowMinSize(screenWidth,screenHeight);
     //game loop
     while (!WindowShouldClose())
-    {
-        //if(/){
+    {   
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        birdJump();
-        drawing();
-        //DrawTexture(pill1,screenWidth/2,screenHeight/2,WHITE);
+        mainMenu();
         EndDrawing();
-    //}
     }
-
+    UnloadTexture(fb);
+    UnloadTexture(background);
     CloseWindow();        
 
     return 0;

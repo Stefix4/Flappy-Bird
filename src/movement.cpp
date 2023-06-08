@@ -19,7 +19,7 @@ struct bird{
         };
         void test(){
             position -=gravity;
-        }
+        };
     
     };
 bird fbf;
@@ -38,10 +38,8 @@ void birdJump(){
 }
 
 void drawing(){
-    // BeginDrawing();
 
     Texture2D fb = LoadTexture("./resources/flappy-bird-photo-removebg-preview.png");// fb = flappy bird 
     DrawTexture(fb, GetRenderWidth() / 4 - 104, fbf.position, WHITE);
 
-    // EndDrawing();
 }
