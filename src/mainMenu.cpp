@@ -5,8 +5,6 @@
 #include <iostream>
 
 int menuStateSelected = 0;
-const int backgroundWidth = 1280;
-const int backgroundHeight = 780;
 
 Rectangle fullscreenButton = { 10, 10, 120, 40 };
 
