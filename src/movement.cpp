@@ -134,9 +134,6 @@ void collision(){
                                                     /// drawings ///
                                                     ////////////////
 
-Texture2D returntxt(Texture2D pill1){
-    return pill1;
-}
 void drawing(){
     Texture2D fb_flap=LoadTexture("./resources//flappy-bird-flaps.png");
     Texture2D fb = LoadTexture("./resources/flappy-bird.png");// fb = flappy bird
