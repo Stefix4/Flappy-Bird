@@ -134,16 +134,13 @@ void collision(){
                                                     /// drawings ///
                                                     ////////////////
 
-void drawing(){
-    Texture2D fb_flap=LoadTexture("./resources//flappy-bird-flaps.png");
-    Texture2D fb = LoadTexture("./resources/flappy-bird.png");// fb = flappy bird
-    //Texture2D pill1 =LoadTexture("./resources/pillar-2.1.png");
+void drawing(Texture2D fb, Texture2D fb_flap, Texture2D pill1){
     DrawTextureEx(fb,fbf.position,1.0,0.75, WHITE);
     DrawCircleV(hb.position,hb.radius,PINK);
     if(IsKeyPressed(KEY_SPACE)||(a>=1 && a<=28)){
         DrawTextureEx(fb_flap,fbf.position,1.0,0.75, WHITE);
     }
-    //DrawTextureV(pill1,wall2.pos_up,WHITE);
+    DrawTextureV(pill1,wall2.pos_up,WHITE);
 }
 
 //   Texture2D pill1 =LoadTexture("./resources/pillar-2.1.png");
