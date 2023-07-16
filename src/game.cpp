@@ -20,20 +20,27 @@ int main(void)
     Image logo = LoadImage("./resources/flappy-bird-logo.png");
     SetWindowIcon(logo);
     Texture2D fb_flap=LoadTexture("./resources//flappy-bird-flaps.png");
-    Texture2D pill1 =LoadTexture("./resources/pillar-2.1.png");
+    Texture2D pill1 =LoadTexture("./resources/pillar-2.png");
     Texture2D fb = LoadTexture("./resources/flappy-bird.png");// fb = flappy bird
-
+    Texture2D pill2 =LoadTexture("./resources/pillar-2.2.png");
     //game loop
     while (!WindowShouldClose())
     {   
         BeginDrawing();
+        draw_hb();
         ClearBackground(WHITE);
         
-        mainMenu();
+        mainMenu(pill1,fb,fb_flap,pill2);
+
         if (menuStateSelected==1)
             currentMenuState = MenuState::PLAY;
+        if (menuStateSelected==2)
+            currentMenuState = MenuState::CONTRLOS;
+        if (menuStateSelected==3)
+            currentMenuState = MenuState::EXIT;
+
         if (currentMenuState == MenuState::PLAY){
-            drawing(fb, fb_flap, pill1);
+            //drawing(fb, fb_flap);
     }
     
         EndDrawing();

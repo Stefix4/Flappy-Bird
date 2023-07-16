@@ -30,7 +30,7 @@ struct bird{
 bird fbf;
 bird hb;
 void birdJump(){
-    if(IsKeyPressed(KEY_SPACE)||(a>=1 && a<=35)){
+    if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(a>=1 && a<=50)){
             fbf.flap();
             a++;
             fbf.position.y +=1+a/10;
@@ -51,18 +51,27 @@ void update_hb(){
                                                     /////////////////////
 
 struct pipe{
+    const float speed =5;
+    bool isVisible=true;
+
     float h1=GetRandomValue(150,500);
     float h2=780-h1-230;
+
     float y1=780-h1;
     float y2=1;
+
     float x_pos =1380.0f;
-    const float speed =5;
-    
+
     Vector2 pos_bottom = {x_pos,y1};
     Vector2 pos_up ={x_pos,y2};
     Vector2 size_bottom ={100,h1};
     Vector2 size_up ={100,h2};
-    
+    Vector2 tex_pos_bottom={2000,2000};
+    Vector2 tex_pos_up={2000,2000};
+
+    void dissappear(){
+        isVisible=false;
+    }
 
     void reset(){
         x_pos=GetRenderWidth();
@@ -71,19 +80,29 @@ struct pipe{
     void update(){
         pos_bottom.x=x_pos;
         pos_up.x=x_pos;
+        
         size_bottom.y=h1;
         size_up.y=h2;
+        
         pos_bottom.y=780-h1;
         pos_up.y=y2;
+        
+        tex_pos_bottom.y=pos_bottom.y;
+        tex_pos_bottom.x=pos_bottom.x-50;
+
+        tex_pos_up.y=size_up.y-960;
+        tex_pos_up.x=pos_up.x-50;
     }
 
     void move(){
         x_pos-=speed;
     }
 
-    void create() {        
+    void create(Texture2D pill1,Texture2D pill2) {     
         DrawRectangleRec(getlower_pipe(), BLACK);
         DrawRectangleRec(getupper_pipe(), BLACK);
+        DrawTextureEx(pill1,tex_pos_bottom,0,5,WHITE);
+        DrawTextureEx(pill2,tex_pos_up,0,5,WHITE);   
     }
 
     Rectangle getlower_pipe(){
@@ -92,9 +111,9 @@ struct pipe{
     Rectangle getupper_pipe(){
         return Rectangle {pos_up.x,pos_up.y,size_up.x,size_up.y};
     }
-    void movement(){
+    void movement(Texture2D pill1,Texture2D pill2){
+        create(pill1,pill2);
         update();
-        create();
         move();
         if(x_pos<=-100){
                 reset();
@@ -106,12 +125,25 @@ struct pipe{
 };
 pipe wall;
 pipe wall2;
-void pipe_movement(){
-    wall.movement(); 
-    if(b==1||wall.x_pos==GetScreenWidth()/2){
-        wall2.movement();   
-        b=1;
-    }
+void pipe_movement(Texture2D pill1,Texture2D pill2){
+    wall.movement(pill1,pill2);
+    if(menuStateSelected==0)
+        wall2.isVisible=true;
+    if(wall2.isVisible)
+        if(b==1||wall.x_pos==GetScreenWidth()/2){
+            wall2.movement(pill1,pill2);   
+            b=1;
+        }
+}
+
+void reset_game(bool game_over){
+    game_over=false;
+    fbf.position ={1280 / 4.0f - 104,780/2.0f-79};
+    wall2.isVisible=false;
+    b=0;
+    wall.x_pos =1380.0f;
+    wall2.x_pos=1380.0f;
+    menuStateSelected=0;
 }
 
 void collision(){
@@ -123,6 +155,7 @@ void collision(){
         game_over=true;
     }
     if(game_over){
+        reset_game(game_over);
        ///////////////////////
        //////game over///////
        /////////////////////
@@ -134,14 +167,12 @@ void collision(){
                                                     /// drawings ///
                                                     ////////////////
 
-void drawing(Texture2D fb, Texture2D fb_flap, Texture2D pill1){
+void drawing(Texture2D fb, Texture2D fb_flap){
     DrawTextureEx(fb,fbf.position,1.0,0.75, WHITE);
-    DrawCircleV(hb.position,hb.radius,PINK);
-    if(IsKeyPressed(KEY_SPACE)||(a>=1 && a<=28)){
+    if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(a>=1 && a<=28)){
         DrawTextureEx(fb_flap,fbf.position,1.0,0.75, WHITE);
     }
-    DrawTextureV(pill1,wall2.pos_up,WHITE);
 }
-
-//   Texture2D pill1 =LoadTexture("./resources/pillar-2.1.png");
-//   DrawTexture(pill1,1,1,WHITE);
+void draw_hb(){
+    DrawCircleV(hb.position,hb.radius,WHITE);
+}
