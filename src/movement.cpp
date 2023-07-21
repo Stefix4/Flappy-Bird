@@ -10,40 +10,46 @@
 
 int a = 0;
 int b =0;
-float gravity=3.0f;
-
+bool game_over;
 struct bird{
-        Vector2 position ={1280 / 4.0f - 104,780/2.0f-79};
-        float radius=45;
-        Vector2 sabilizer ={65,80};
-        void update(){
-            position.y+=gravity;
-            gravity+=0.05f;
-        };
+    float speed=0;
+    Vector2 position ={1280 / 4.0f - 104,780/2.0f-79};
+    float radius=40;
+    Vector2 stabilizer ={65,80};
 
-        void flap(){
-            position.y -=3*gravity;
-            gravity=3.0f;
-        };
-    
+     void gravity_pull(){
+        speed-=0.05;
+        position.y-=speed;
     };
+    
+    void update_pos(){
+        position.y-=speed;
+        speed-=0.05;
+    }
+
+    void flap(){
+        speed=4.75;
+    };
+};
 bird fbf;
 bird hb;
 void birdJump(){
-    if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(a>=1 && a<=50)){
-            fbf.flap();
-            a++;
-            fbf.position.y +=1+a/10;
-        }
-        else
-            if(fbf.position.y<GetScreenHeight()-140){
-                fbf.update();
-                a=0;
-            }
+    if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+        if(fbf.speed<=0)
+        fbf.speed=0;
+        fbf.flap();
+    }
+    if(fbf.speed>=1){
+        fbf.update_pos();
+    }
+
+    if(fbf.position.y<GetScreenHeight()-140){
+        fbf.gravity_pull();
+    }
 }
 void update_hb(){
-    hb.position.y=fbf.position.y+hb.sabilizer.y;
-    hb.position.x=fbf.position.x+hb.sabilizer.x;
+    hb.position.y=fbf.position.y+hb.stabilizer.y;
+    hb.position.x=fbf.position.x+hb.stabilizer.x;
 }
 
                                                     /////////////////////
@@ -51,11 +57,12 @@ void update_hb(){
                                                     /////////////////////
 
 struct pipe{
-    const float speed =5;
-    bool isVisible=true;
+    const float speed =4.5;
+    
+    int gap=280;
 
     float h1=GetRandomValue(150,500);
-    float h2=780-h1-230;
+    float h2=780-h1-gap;
 
     float y1=780-h1;
     float y2=1;
@@ -69,8 +76,11 @@ struct pipe{
     Vector2 tex_pos_bottom={2000,2000};
     Vector2 tex_pos_up={2000,2000};
 
-    void dissappear(){
-        isVisible=false;
+    void reset_size(){
+        h1=GetRandomValue(150,500);
+        h2=780-h1-gap;
+        y1=780-h1;
+        y2=1;
     }
 
     void reset(){
@@ -118,47 +128,37 @@ struct pipe{
         if(x_pos<=-100){
                 reset();
                 h1=GetRandomValue(150,500);
-                h2=780-h1-230;
+                h2=780-h1-gap;
                 update();
         }
+        update();
     }
 };
 pipe wall;
 pipe wall2;
 void pipe_movement(Texture2D pill1,Texture2D pill2){
     wall.movement(pill1,pill2);
-    if(menuStateSelected==0)
-        wall2.isVisible=true;
-    if(wall2.isVisible)
-        if(b==1||wall.x_pos==GetScreenWidth()/2){
+        if(b==1||wall.x_pos<=GetScreenWidth()/2){
             wall2.movement(pill1,pill2);   
             b=1;
         }
 }
 
-void reset_game(bool game_over){
-    game_over=false;
+void reset_game(){
     fbf.position ={1280 / 4.0f - 104,780/2.0f-79};
-    wall2.isVisible=false;
-    b=0;
-    wall.x_pos =1380.0f;
-    wall2.x_pos=1380.0f;
+    wall.reset_size();
+    wall2.reset_size();
+    wall.reset();
+    wall2.x_pos=1380.0f+640.0f;
     menuStateSelected=0;
 }
 
 void collision(){
-    bool game_over=false;
     if(CheckCollisionCircleRec(hb.position,hb.radius,wall.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall.getupper_pipe())){
         game_over=true;
     }
-      if(CheckCollisionCircleRec(hb.position,hb.radius,wall2.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall2.getupper_pipe())){
+    if(CheckCollisionCircleRec(hb.position,hb.radius,wall2.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall2.getupper_pipe())){
         game_over=true;
-    }
-    if(game_over){
-        reset_game(game_over);
-       ///////////////////////
-       //////game over///////
-       /////////////////////
     }
 }
 
@@ -168,9 +168,9 @@ void collision(){
                                                     ////////////////
 
 void drawing(Texture2D fb, Texture2D fb_flap){
-    DrawTextureEx(fb,fbf.position,1.0,0.75, WHITE);
-    if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(a>=1 && a<=28)){
-        DrawTextureEx(fb_flap,fbf.position,1.0,0.75, WHITE);
+    DrawTextureEx(fb,fbf.position,0,0.75, WHITE);
+    if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(fbf.speed>=1.5&&fbf.speed<=4.75)){
+        DrawTextureEx(fb_flap,fbf.position,0,0.75, WHITE);
     }
 }
 void draw_hb(){

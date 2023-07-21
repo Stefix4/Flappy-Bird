@@ -32,6 +32,11 @@ int main(void)
         
         mainMenu(pill1,fb,fb_flap,pill2);
 
+        if(game_over){
+            game_over=false;
+            reset_game();
+        }
+
         if (menuStateSelected==1)
             currentMenuState = MenuState::PLAY;
         if (menuStateSelected==2)
@@ -39,9 +44,7 @@ int main(void)
         if (menuStateSelected==3)
             currentMenuState = MenuState::EXIT;
 
-        if (currentMenuState == MenuState::PLAY){
-            //drawing(fb, fb_flap);
-    }
+    
     
         EndDrawing();
     }
