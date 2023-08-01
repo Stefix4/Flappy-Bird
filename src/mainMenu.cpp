@@ -13,9 +13,10 @@ const int backgroundHeight = 780;
 Rectangle fullscreenButton = { 10, 10, 100, 100 };
 
 
-void mainMenu(Texture2D pill1,Texture2D fb,Texture2D fb_flap,Texture2D pill2,Texture2D Start_Button){
+void mainMenu(Texture2D pill1,Texture2D fb,Texture2D fb_flap,Texture2D pill2,Texture2D Start_Button, Texture2D bg){
     if(menuStateSelected == 0){
         DrawText( "Asta e meniu ba", 0, 0 ,20 ,BLACK );
+        DrawTexture(bg, 0, 0 ,WHITE);
         DrawRectangleRec(fullscreenButton,PINK);
         DrawTexture(Start_Button,backgroundWidth/2,backgroundHeight/2,WHITE);
         if(CheckCollisionPointRec(GetMousePosition(), fullscreenButton) && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)){
