@@ -156,9 +156,11 @@ void reset_game(){
 void collision(){
     if(CheckCollisionCircleRec(hb.position,hb.radius,wall.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall.getupper_pipe())){
         game_over=true;
+        reset_game();
     }
     if(CheckCollisionCircleRec(hb.position,hb.radius,wall2.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall2.getupper_pipe())){
         game_over=true;
+        reset_game();
     }
 }
 
