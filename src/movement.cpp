@@ -169,7 +169,8 @@ void collision(){
                                                     /// drawings ///
                                                     ////////////////
 
-void drawing(Texture2D fb, Texture2D fb_flap){
+void drawing(Texture2D fb, Texture2D fb_flap,Texture2D bg_game){
+    DrawTextureEx(bg_game,Vector2{0,0},0,1.6f,WHITE);
     DrawTextureEx(fb,fbf.position,0,0.75, WHITE);
     if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(fbf.speed>=1.5&&fbf.speed<=4.75)){
         DrawTextureEx(fb_flap,fbf.position,0,0.75, WHITE);

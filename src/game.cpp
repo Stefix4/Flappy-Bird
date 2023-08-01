@@ -25,6 +25,7 @@ int main(void)
     Texture2D fb = LoadTexture("./resources/flappy-bird.png");// fb = flappy bird
     Texture2D pill2 =LoadTexture("./resources/pillar-2.2.png");
     Texture2D bg = LoadTexture("./resources/background2.png");
+    Texture2D bg_game = LoadTexture("./resources/background.png");
     //game loop
     while (!WindowShouldClose())
     {   
@@ -32,7 +33,7 @@ int main(void)
         draw_hb();
         ClearBackground(WHITE);
         
-        mainMenu(pill1, fb, fb_flap, pill2, Start_Button, bg);
+        mainMenu(pill1, fb, fb_flap, pill2, Start_Button, bg, bg_game);
 
         if(game_over){
             game_over=false;
