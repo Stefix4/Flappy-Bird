@@ -1,5 +1,6 @@
 #include "movement.hpp"
 #include "mainMenu.hpp"
+#include "game.hpp"
 
 #include <iostream>
 #include <raylib.h>
@@ -42,10 +43,7 @@ void birdJump(){
     if(fbf.speed>=1){
         fbf.update_pos();
     }
-
-    if(fbf.position.y<GetScreenHeight()-140){
-        fbf.gravity_pull();
-    }
+    fbf.gravity_pull();
 }
 void update_hb(){
     hb.position.y=fbf.position.y+hb.stabilizer.y;
@@ -146,6 +144,7 @@ void pipe_movement(Texture2D pill1,Texture2D pill2){
 
 void reset_game(){
     fbf.position ={1280 / 4.0f - 104,780/2.0f-79};
+    fbf.speed=0;
     wall.reset_size();
     wall2.reset_size();
     wall.reset();
@@ -159,6 +158,10 @@ void collision(){
         reset_game();
     }
     if(CheckCollisionCircleRec(hb.position,hb.radius,wall2.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall2.getupper_pipe())){
+        game_over=true;
+        reset_game();
+    }
+    if(fbf.position.y>=780||fbf.position.y<=0){
         game_over=true;
         reset_game();
     }
