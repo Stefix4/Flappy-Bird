@@ -18,7 +18,7 @@ void mainMenu(Texture2D pill1,Texture2D fb,Texture2D fb_flap,Texture2D pill2,Tex
         DrawText( "Asta e meniu ba", 0, 0 ,20 ,BLACK );
         DrawTextureEx(bg,Vector2{0,0},0,1.6f,WHITE);
         DrawRectangleRec(fullscreenButton,PINK);
-        DrawTexture(Start_Button,backgroundWidth/2,backgroundHeight/2,WHITE);
+        DrawTextureEx(Start_Button,Vector2{backgroundWidth/2-100,backgroundHeight/2},0,1.6f,WHITE);
         if(CheckCollisionPointRec(GetMousePosition(), fullscreenButton) && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)){
             menuStateSelected=1;
         }
