@@ -12,6 +12,7 @@
 int a = 0;
 int b =0;
 bool game_over;
+int score=0;
 struct bird{
     float speed=0;
     Vector2 position ={1280 / 4.0f - 104,780/2.0f-79};
@@ -57,6 +58,8 @@ void update_hb(){
 struct pipe{
     const float speed =4.5;
     
+    bool pass;
+
     int gap=280;
 
     float h1=GetRandomValue(150,500);
@@ -83,6 +86,7 @@ struct pipe{
 
     void reset(){
         x_pos=GetRenderWidth();
+        pass=false;
     }
     
     void update(){
@@ -167,12 +171,24 @@ void collision(){
     }
 }
 
+void Counter(){
+    if(!wall.pass&&hb.position.x>wall.pos_bottom.x){
+        wall.pass=true;
+        score++;
+    }
+    if(!wall2.pass&&hb.position.x>wall2.pos_bottom.x){
+        wall2.pass=true;
+        score++;
+    }
+}
+
 
                                                     ////////////////
                                                     /// drawings ///
                                                     ////////////////
 
 void drawing(Texture2D fb, Texture2D fb_flap,Texture2D bg_game){
+    DrawText(TextFormat("Integer value: %d", score),1,1,10,BLACK);
     DrawTextureEx(bg_game,Vector2{0,0},0,1.6f,WHITE);
     DrawTextureEx(fb,fbf.position,0,0.75, WHITE);
     if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(fbf.speed>=1.5&&fbf.speed<=4.75)){

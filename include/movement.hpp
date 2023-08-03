@@ -11,6 +11,7 @@ void pipe_movement(Texture2D pill1,Texture2D pill2);
 void drawing(Texture2D fb, Texture2D fb_flap,Texture2D bg_game);
 
 void collision();
+void Counter();
 void update_hb();
 void draw_hb();
 void reset_game();
