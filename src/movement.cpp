@@ -197,5 +197,6 @@ void drawing(Texture2D fb, Texture2D fb_flap,Texture2D bg_game){
 }
 void draw_hb(){
     DrawCircleV(hb.position,hb.radius,WHITE);
-    DrawRectangleRec(StartButton,PINK);
+    DrawRectangleRec(StartButton_hb,PINK);
+    DrawRectangleRec(ExitButton_hb,PINK);
 }
