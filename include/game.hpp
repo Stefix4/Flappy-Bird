@@ -9,3 +9,4 @@ extern Texture2D pill2;
 extern Texture2D Start_Button;
 extern Texture2D bg;
 extern Texture2D bg_game;
+extern Texture2D Start_ButtonA;

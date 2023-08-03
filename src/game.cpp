@@ -26,6 +26,7 @@ int main(void)
     Texture2D pill2 =LoadTexture("./resources/pillar-2.2.png");
     Texture2D bg = LoadTexture("./resources/background2.png");
     Texture2D bg_game = LoadTexture("./resources/background.png");
+    Texture2D Start_ButtonA = LoadTexture("./resources//Start_ButtonA.png");
     //game loop
     while (!WindowShouldClose())
     {   
@@ -33,7 +34,7 @@ int main(void)
         draw_hb();
         ClearBackground(WHITE);
         
-        mainMenu(pill1, fb, fb_flap, pill2, Start_Button, bg, bg_game);
+        mainMenu(pill1, fb, fb_flap, pill2, Start_Button, bg, bg_game, Start_ButtonA);
 
         if(game_over){
             game_over=false;
