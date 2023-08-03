@@ -58,6 +58,9 @@ int main(void)
     UnloadTexture(fb);
     UnloadTexture(pill1);
     UnloadTexture(Start_Button);
+    UnloadTexture(Start_ButtonA);
+    UnloadTexture(bg);
+    UnloadTexture(bg_game);
 
     CloseWindow();        
 
