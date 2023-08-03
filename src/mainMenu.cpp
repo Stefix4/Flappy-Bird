@@ -17,10 +17,13 @@ void mainMenu(Texture2D pill1,Texture2D fb,Texture2D fb_flap,Texture2D pill2,Tex
         DrawText( "Asta e meniu ba", 0, 0 ,20 ,BLACK );
         DrawTextureEx(bg,Vector2{0,0},0,1.6f,WHITE);
         DrawTextureEx(Start_Button,Vector2{backgroundWidth/2-100,backgroundHeight/2},0,1.6f,WHITE);
-        if(CheckCollisionPointRec(GetMousePosition(), StartButton) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && IsMouseButtonReleased(MOUSE_LEFT_BUTTON)){
-            DrawTextureEx(Start_ButtonA,Vector2{backgroundWidth/2-100,backgroundHeight/2},0,1.6f,WHITE);
+
+        if(CheckCollisionPointRec(GetMousePosition(), StartButton)){
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)&& IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+                DrawTextureEx(Start_ButtonA,Vector2{backgroundWidth/2-100,backgroundHeight/2},0,1.6f,WHITE);
             menuStateSelected=1;
         }
+
     }
     else if(menuStateSelected == 1){
         drawing(fb,fb_flap,bg_game);
