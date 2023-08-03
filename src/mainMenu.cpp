@@ -18,10 +18,10 @@ void mainMenu(Texture2D pill1,Texture2D fb,Texture2D fb_flap,Texture2D pill2,Tex
         DrawTextureEx(bg,Vector2{0,0},0,1.6f,WHITE);
         DrawTextureEx(Start_Button,Vector2{backgroundWidth/2-100,backgroundHeight/2},0,1.6f,WHITE);
 
-        if(CheckCollisionPointRec(GetMousePosition(), StartButton)){
-            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON)&& IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
-                DrawTextureEx(Start_ButtonA,Vector2{backgroundWidth/2-100,backgroundHeight/2},0,1.6f,WHITE);
-            menuStateSelected=1;
+        if(CheckCollisionPointRec(GetMousePosition(), StartButton) && IsMouseButtonDown(MOUSE_LEFT_BUTTON)){
+            DrawTextureEx(Start_ButtonA,Vector2{backgroundWidth/2-100,backgroundHeight/2},0,1.6f,WHITE);
+            if(IsMouseButtonUp(MOUSE_LEFT_BUTTON))
+                menuStateSelected=1;
         }
 
     }
