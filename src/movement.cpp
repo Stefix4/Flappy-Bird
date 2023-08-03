@@ -147,6 +147,7 @@ void pipe_movement(Texture2D pill1,Texture2D pill2){
 }
 
 void reset_game(){
+    score=0;
     fbf.position ={1280 / 4.0f - 104,780/2.0f-79};
     fbf.speed=0;
     wall.reset_size();
@@ -171,7 +172,8 @@ void collision(){
     }
 }
 
-void Counter(){
+void counter(){
+    DrawText(TextFormat("Score: %d", score),1,1,40,BLACK);
     if(!wall.pass&&hb.position.x>wall.pos_bottom.x){
         wall.pass=true;
         score++;
@@ -188,7 +190,6 @@ void Counter(){
                                                     ////////////////
 
 void drawing(Texture2D fb, Texture2D fb_flap,Texture2D bg_game){
-    DrawText(TextFormat("Integer value: %d", score),1,1,10,BLACK);
     DrawTextureEx(bg_game,Vector2{0,0},0,1.6f,WHITE);
     DrawTextureEx(fb,fbf.position,0,0.75, WHITE);
     if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(fbf.speed>=1.5&&fbf.speed<=4.75)){

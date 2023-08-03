@@ -41,6 +41,7 @@ void mainMenu(Texture2D pill1,Texture2D fb,Texture2D fb_flap,Texture2D pill2,Tex
         birdJump();
         update_hb();
         pipe_movement(pill1,pill2);
+        counter();
         // if(CheckCollisionPointRec(GetMousePosition(), fullscreenButton) && IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
         //     menuStateSelected++;
         
