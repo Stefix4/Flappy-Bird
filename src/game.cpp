@@ -23,7 +23,7 @@ int main(void)
     Texture2D fb_flap=LoadTexture("./resources//flappy-bird-flaps.png");
     Texture2D pill1 =LoadTexture("./resources/pillar-2.png");
     Texture2D fb = LoadTexture("./resources/flappy-bird.png");// fb = flappy bird
-    Texture2D pill2 =LoadTexture("./resources/pillar-2.2.png");
+    Texture2D pill2 =LoadTexture("./resources/pillar-1.png");
     Texture2D bg = LoadTexture("./resources/background2.png");
     Texture2D bg_game = LoadTexture("./resources/background.png");
     Texture2D Start_ButtonA = LoadTexture("./resources//Start_ButtonA.png");
