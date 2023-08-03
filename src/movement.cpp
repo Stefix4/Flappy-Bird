@@ -13,6 +13,8 @@ int a = 0;
 int b =0;
 bool game_over;
 int score=0;
+int final_score=0;
+
 struct bird{
     float speed=0;
     Vector2 position ={1280 / 4.0f - 104,780/2.0f-79};
@@ -182,6 +184,7 @@ void counter(){
         wall2.pass=true;
         score++;
     }
+    final_score=score;
 }
 
 

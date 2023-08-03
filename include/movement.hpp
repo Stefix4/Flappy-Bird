@@ -16,4 +16,4 @@ void update_hb();
 void draw_hb();
 void reset_game();
 extern bool game_over;
-extern int score;
+extern int final_score;
