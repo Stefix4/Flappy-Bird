@@ -154,7 +154,7 @@ void reset_game(){
     wall2.reset_size();
     wall.reset();
     wall2.x_pos=1380.0f+640.0f;
-    menuStateSelected=0;
+    menuStateSelected=3;
 }
 
 void collision(){

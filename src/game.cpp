@@ -30,6 +30,9 @@ int main(void)
     Texture2D Exit_Button = LoadTexture("./resources//Exit_Button.png");
     Texture2D Exit_ButtonA = LoadTexture("./resources//Exit_ButtonA.png");
     Texture2D Title_Screen = LoadTexture("./resources//Title_Screen.png");
+    Texture2D Restart_Button = LoadTexture("./resources//Restart_Button.png");
+    Texture2D Restart_ButtonA = LoadTexture("./resources//Restart_ButtonA.png");
+
 
     //game loop
     while (!WindowShouldClose())
@@ -38,7 +41,7 @@ int main(void)
         draw_hb();
         ClearBackground(WHITE);
         
-        mainMenu(pill1, fb, fb_flap, pill2, Start_Button, bg, bg_game, Start_ButtonA, Exit_Button, Exit_ButtonA, Title_Screen);
+        mainMenu(pill1, fb, fb_flap, pill2, Start_Button, bg, bg_game, Start_ButtonA, Exit_Button, Exit_ButtonA, Title_Screen, Restart_Button, Restart_ButtonA);
 
         if(game_over){
             game_over=false;
@@ -47,11 +50,11 @@ int main(void)
 
         if (menuStateSelected==1)
             currentMenuState = MenuState::PLAY;
-        // if (menuStateSelected==2)
-        //     currentMenuState = MenuState::CONTRLOS;
+         
         if (menuStateSelected==2)
             currentMenuState = MenuState::EXIT;
-
+        if (menuStateSelected==3)
+             currentMenuState = MenuState::GAME_OVER;
     
     
         EndDrawing();
@@ -69,6 +72,9 @@ int main(void)
     UnloadTexture(Start_ButtonA);
     UnloadTexture(Exit_Button);
     UnloadTexture(Exit_ButtonA);
+    UnloadTexture(Title_Screen);
+    UnloadTexture(Restart_Button);
+    UnloadTexture(Restart_ButtonA);
 
     CloseWindow();        
 
