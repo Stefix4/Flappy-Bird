@@ -3,17 +3,24 @@
 #include "game.hpp"
 
 #include <iostream>
+#include <fstream>
 #include <raylib.h>
 
-                                                    /////////////////////
-                                                    /// bird movement ///
-                                                    /////////////////////
+//  std::ifstream fin("cache.csv");
+//  std::ofstream fout("cache.csv");
+
+
+/////////////////////
+/// bird movement ///
+/////////////////////
 
 int a = 0;
 int b =0;
 bool game_over;
 int score=0;
 int final_score=0;
+int highest_score;
+int high_score;
 
 struct bird{
     float speed=0;
@@ -175,7 +182,14 @@ void collision(){
 }
 
 void counter(){
+    // std::ifstream fin("text.txt");
+    
+    // unsigned char *cuvant;
+    // cuvant = LoadFileData("text.txt",high_score);
+
     DrawText(TextFormat("Score: %d", score),1,1,40,BLACK);
+    DrawText(TextFormat("Highest Score: %d", highest_score),1,40,40,BLACK);
+    
     if(!wall.pass&&hb.position.x>wall.pos_bottom.x){
         wall.pass=true;
         score++;
@@ -184,7 +198,19 @@ void counter(){
         wall2.pass=true;
         score++;
     }
+    std::ifstream fin("cache.csv");
+    fin >> high_score;
+    if(high_score > highest_score)
+        highest_score = high_score;
+
     final_score=score;
+    
+    if(highest_score < final_score){
+        std::ofstream fout("cache.csv");
+        highest_score = final_score;
+        fout << highest_score;
+    }
+    
 }
 
 

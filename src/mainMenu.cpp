@@ -52,6 +52,7 @@ void mainMenu(Texture2D pill1,Texture2D fb,Texture2D fb_flap,Texture2D pill2,Tex
         DrawTextureEx(bg,Vector2{0,0},0,1.6f,WHITE);
         DrawText("GAME OVER", backgroundWidth/6-35, 0, 150, BLACK);
         DrawText(TextFormat("Your Score: %d", final_score),backgroundWidth/3-30,backgroundHeight/3,65,BLACK);
+        DrawText(TextFormat("Highest Score is: %d", highest_score),backgroundWidth/3-110,backgroundHeight/3+75,65,BLACK);
         DrawTextureEx(Restart_Button,Vector2{backgroundWidth/2-100,backgroundHeight/2+80},0,1.6f,WHITE);
         DrawTextureEx(Exit_Button,Vector2{backgroundWidth/2-100,backgroundHeight/2+150},0,1.6f,WHITE);
 

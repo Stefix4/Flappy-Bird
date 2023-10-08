@@ -17,3 +17,5 @@ void draw_hb();
 void reset_game();
 extern bool game_over;
 extern int final_score;
+extern int highest_score;
+extern int high_score;

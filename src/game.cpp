@@ -1,8 +1,9 @@
 #include <raylib.h>
+#include <fstream>
+
 #include "movement.hpp"
 #include "mainMenu.hpp"
 #include "game.hpp"
-
 
 MenuState currentMenuState = MenuState::MENU;
 
@@ -15,6 +16,8 @@ int main(void)
     InitWindow(screenWidth,screenHeight, "Flappy Bird");
     SetTargetFPS(144);
     SetWindowMinSize(screenWidth,screenHeight);
+
+    
 
     //declaring images/textures
     Image logo = LoadImage("./resources/flappy-bird-logo.png");
@@ -32,8 +35,6 @@ int main(void)
     Texture2D Title_Screen = LoadTexture("./resources//Title_Screen.png");
     Texture2D Restart_Button = LoadTexture("./resources//Restart_Button.png");
     Texture2D Restart_ButtonA = LoadTexture("./resources//Restart_ButtonA.png");
-
-
     //game loop
     while (!WindowShouldClose())
     {   
