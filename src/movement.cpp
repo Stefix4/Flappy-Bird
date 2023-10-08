@@ -19,8 +19,8 @@ int b =0;
 bool game_over;
 int score=0;
 int final_score=0;
-int highest_score;
-int high_score;
+long long highest_score;
+long long high_score;
 
 struct bird{
     float speed=0;
