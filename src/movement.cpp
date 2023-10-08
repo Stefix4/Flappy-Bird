@@ -182,11 +182,6 @@ void collision(){
 }
 
 void counter(){
-    // std::ifstream fin("text.txt");
-    
-    // unsigned char *cuvant;
-    // cuvant = LoadFileData("text.txt",high_score);
-
     DrawText(TextFormat("Score: %d", score),1,1,40,BLACK);
     DrawText(TextFormat("Highest Score: %d", highest_score),1,40,40,BLACK);
     
