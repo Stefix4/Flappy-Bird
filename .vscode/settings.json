@@ -44,5 +44,6 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp"
-    }
+    },
+    "makefile.configureOnOpen": false
 }
