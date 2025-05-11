@@ -10,14 +10,12 @@ MenuState currentMenuState = MenuState::MENU;
 int main(void)
 {
     const int screenWidth = 1280;
-    const int screenHeight = 780;
+    const int screenHeight = 720;
 
     //initialling the window
     InitWindow(screenWidth,screenHeight, "Flappy Bird");
     SetTargetFPS(144);
     SetWindowMinSize(screenWidth,screenHeight);
-
-    
 
     //declaring images/textures
     Image logo = LoadImage("./resources/flappy-bird-logo.png");
@@ -51,11 +49,10 @@ int main(void)
 
         if (menuStateSelected==1)
             currentMenuState = MenuState::PLAY;
-         
         if (menuStateSelected==2)
             currentMenuState = MenuState::EXIT;
         if (menuStateSelected==3)
-             currentMenuState = MenuState::GAME_OVER;
+            currentMenuState = MenuState::GAME_OVER;
     
     
         EndDrawing();
