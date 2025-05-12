@@ -182,8 +182,8 @@ void collision(){
 }
 
 void counter(){
-    DrawText(TextFormat("Score: %d", score),1,1,40,BLACK);
-    DrawText(TextFormat("Highest Score: %d", highest_score),1,40,40,BLACK);
+    DrawText(TextFormat("Score: %d", score),1,1,40, WHITE);
+    DrawText(TextFormat("Highest Score: %d", highest_score),1,40,40, WHITE);
     
     if(!wall.pass&&hb.position.x>wall.pos_bottom.x){
         wall.pass=true;
