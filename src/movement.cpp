@@ -1,6 +1,7 @@
 #include "movement.hpp"
 #include "mainMenu.hpp"
 #include "game.hpp"
+#include "textures.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -29,7 +30,7 @@ struct bird{
     Vector2 stabilizer ={65,80};
 
      void gravity_pull(){
-        speed-=0.05;
+        speed-=0.1f;
         position.y-=speed;
     };
     
@@ -65,7 +66,7 @@ void update_hb(){
                                                     /////////////////////
 
 struct pipe{
-    const float speed =4.5;
+    float speed = 4.5;
     
     bool pass;
 
@@ -122,8 +123,8 @@ struct pipe{
     void create(Texture2D pill1,Texture2D pill2) {     
         DrawRectangleRec(getlower_pipe(), BLACK);
         DrawRectangleRec(getupper_pipe(), BLACK);
-        DrawTextureEx(pill1,tex_pos_bottom,0,5,WHITE);
-        DrawTextureEx(pill2,tex_pos_up,0,5,WHITE);   
+        DrawTextureEx(resources.pill1,tex_pos_bottom,0,5,WHITE);
+        DrawTextureEx(resources.pill2,tex_pos_up,0,5,WHITE);   
     }
 
     Rectangle getlower_pipe(){
@@ -136,7 +137,7 @@ struct pipe{
         create(pill1,pill2);
         update();
         move();
-        if(x_pos<=-100){
+        if(x_pos<=-150){
                 reset();
                 h1=GetRandomValue(150,500);
                 h2=780-h1-gap;
@@ -145,29 +146,31 @@ struct pipe{
         update();
     }
 };
-pipe wall;
+pipe wall1;
 pipe wall2;
 void pipe_movement(Texture2D pill1,Texture2D pill2){
-    wall.movement(pill1,pill2);
-        if(b==1||wall.x_pos<=GetScreenWidth()/2){
+    wall1.movement(pill1,pill2);
+        if(b==1||wall1.x_pos<=GetScreenWidth()/2){
             wall2.movement(pill1,pill2);   
             b=1;
         }
 }
 
 void reset_game(){
+    wall1.speed = 4.5;
+    wall2.speed = 4.5;
     score=0;
     fbf.position ={1280 / 4.0f - 104,780/2.0f-79};
     fbf.speed=0;
-    wall.reset_size();
+    wall1.reset_size();
     wall2.reset_size();
-    wall.reset();
+    wall1.reset();
     wall2.x_pos=1380.0f+640.0f;
     menuStateSelected=3;
 }
 
 void collision(){
-    if(CheckCollisionCircleRec(hb.position,hb.radius,wall.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall.getupper_pipe())){
+    if(CheckCollisionCircleRec(hb.position,hb.radius,wall1.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall1.getupper_pipe())){
         game_over=true;
         reset_game();
     }
@@ -182,16 +185,19 @@ void collision(){
 }
 
 void counter(){
-    DrawText(TextFormat("Score: %d", score),1,1,40, WHITE);
-    DrawText(TextFormat("Highest Score: %d", highest_score),1,40,40, WHITE);
+    DrawTextEx(resources.novencento,TextFormat("Score:%d", score), Vector2{10, 10}, 40, -3,WHITE);
     
-    if(!wall.pass&&hb.position.x>wall.pos_bottom.x){
-        wall.pass=true;
+    if(!wall1.pass && ((hb.position.x > wall1.pos_bottom.x) || (hb.position.x > wall1.pos_up.x))){
+        wall1.pass = true;
         score++;
+        wall1.speed += 0.05;
+        wall2.speed += 0.05;
     }
-    if(!wall2.pass&&hb.position.x>wall2.pos_bottom.x){
-        wall2.pass=true;
+    if(!wall2.pass && ((hb.position.x > wall2.pos_bottom.x) || (hb.position.x > wall2.pos_up.x))){
+        wall2.pass = true;
         score++;
+        wall1.speed += 0.05;
+        wall2.speed += 0.05;
     }
     std::ifstream fin("cache.csv");
     fin >> high_score;
@@ -209,19 +215,20 @@ void counter(){
 }
 
 
+
                                                     ////////////////
                                                     /// drawings ///
                                                     ////////////////
 
 void drawing(Texture2D fb, Texture2D fb_flap,Texture2D bg_game){
-    DrawTextureEx(bg_game,Vector2{0,0},0,1.6f,WHITE);
-    DrawTextureEx(fb,fbf.position,0,0.75, WHITE);
+    DrawTextureEx(resources.bg_game,Vector2{0,0},0,1.6f,WHITE);
+    DrawTextureEx(resources.fb,fbf.position,0,0.75, WHITE);
     if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(fbf.speed>=1.5&&fbf.speed<=4.75)){
-        DrawTextureEx(fb_flap,fbf.position,0,0.75, WHITE);
+        DrawTextureEx(resources.fb_flap,fbf.position,0,0.75, WHITE);
     }
 }
 void draw_hb(){
     DrawCircleV(hb.position,hb.radius,WHITE);
-    DrawRectangleRec(StartButton_hb,PINK);
-    DrawRectangleRec(ExitButton_hb,PINK);
+    DrawRectangleRec(StartButton_hb,WHITE);
+    DrawRectangleRec(ExitButton_hb,WHITE);
 }

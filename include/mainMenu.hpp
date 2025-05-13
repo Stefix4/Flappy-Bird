@@ -8,3 +8,5 @@ void mainMenu(Texture2D pill1,Texture2D fb,Texture2D fb_flap,Texture2D pill2,Tex
 extern Rectangle StartButton_hb;
 extern Rectangle ExitButton_hb;
 extern Rectangle RestartButton_hb;
+
+extern int game;

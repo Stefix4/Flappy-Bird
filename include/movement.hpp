@@ -15,6 +15,8 @@ void counter();
 void update_hb();
 void draw_hb();
 void reset_game();
+void fpsReturn();
+
 extern bool game_over;
 extern int final_score;
 extern long long highest_score;
