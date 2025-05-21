@@ -35,7 +35,7 @@
 <ol type = "1">
     <li><p>Folosind aplicația Git, urmăriți urmatorii pași:</p></li>
     <ul>
-        <li>Clone repository using:</li></ul>
+        <li>Clonează repozitoriul folosind comanda:</li></ul>
 
 ```sh
 git clone https://github.com/Stefix4/Flappy-Bird.git
@@ -54,7 +54,7 @@ git clone https://github.com/Stefix4/Flappy-Bird.git
 
 ---
 
-# Realizatori
+<h3>Realizatori</h3>
 
 <a href="https://github.com/Stefix4/Flappy-Bird/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=Stefix4/Flappy-Bird" />
