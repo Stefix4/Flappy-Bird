@@ -33,25 +33,28 @@
 
 <h2>Metode de descarcare</h2>
 <ol type = "1">
-    <p>Folosind aplicația Git, urmăriți urmatorii pași:</p>
-    <li><ul>
+    <li><p>Folosind aplicația Git, urmăriți urmatorii pași:</p></li>
+    <ul>
         <li>Clone repository using:</li>
+
         ```bash
         git clone https://github.com/Stefix4/Flappy-Bird.git
-        ```
-        <li>Rulați fișierul Game.exe</li>
+            ```
+        
+        <li>Rulați fișierul Game</li>
         <img src="https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
-    </li></ul>
-    <p>Descarcați fișierele în format ZIP, apoi:</p>
-    <li><ul>
+    </ul>
+    <li><p>Descarcați fișierele în format ZIP, apoi:</p></li>
+    <ul>
         <li>Extrageți fișierele</li>
-        <li>Rulați fișierul Game.exe</li>
+        <li>Rulați fișierul Game</li>
         <img src="https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
-    </li></ul>
+    </ul>
+</ol>
 
 ---
 
-## Realizatori
+# Realizatori
 
 <a href="https://github.com/Stefix4/Flappy-Bird/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=Stefix4/Flappy-Bird" />
