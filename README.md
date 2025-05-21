@@ -51,6 +51,9 @@ git clone https://github.com/Stefix4/Flappy-Bird.git
     <img src="https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
 </ul>
 </ol>
+
+---
+
 # Realizatori
 
 <a href="https://github.com/Stefix4/Flappy-Bird/graphs/contributors">
