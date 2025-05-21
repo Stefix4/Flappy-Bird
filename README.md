@@ -1,4 +1,6 @@
-<h1 align="center">Material Bread</h1>
+<img align = "center" src="https://github.com/Stefix4/Flappy-Bird/blob/main/resources/images/flappy-bird-logo.png">
+
+<h1 align="center">Flappy-Bird</h1>
 
 Game made using Raylib and C++
 
