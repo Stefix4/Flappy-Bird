@@ -19,8 +19,8 @@
 <h2>Limbaj de programare și tehnologii utilizate</h2>
     <ul>
         <li><strong>Limbaj:</strong> C++</li>
-        <li><strong>Bibliotecă grafică:</strong> Raylib</li>
-        <li><strong>Fișiere externe:</strong> CSV pentru scorul maxim, texturi PNG, fonturi TTF</li>
+        <li><strong>Bibliotecă grafică:</strong> [Raylib](include/raylib.h)</li>
+        <li><strong>Fișiere externe:</strong> CSV, texturi PNG, font TTF</li>
     </ul>
 #### **How to compile & run:**
 
