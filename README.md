@@ -55,7 +55,9 @@ git clone https://github.com/Stefix4/Flappy-Bird.git
 ---
 
 <h3>Realizatori</h3>
-<p></p>
+<p>
+    
+</p>
 <a href="https://github.com/Stefix4/Flappy-Bird/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=Stefix4/Flappy-Bird" />
 </a>
