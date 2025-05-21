@@ -41,18 +41,21 @@
     <li><p>Folosind aplicația Git, urmăriți urmatorii pași:</p></li>
     <ul>
         <li>Clonează repozitoriul folosind comanda:</li></ul>
+        <p> </p>
 
 ```sh
 git clone https://github.com/Stefix4/Flappy-Bird.git
 ```
 <ul>
     <li>Rulați fișierul Game</li>
+    <p> </p>
     <img src = "https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
 </ul>
 <li><p>Descarcați fișierele în format ZIP, apoi:</p></li>
 <ul>
     <li>Extrageți fișierele</li>
     <li>Rulați fișierul Game</li>
+    <p> </p>
     <img src = "https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
 </ul>
 </ol>
@@ -68,17 +71,15 @@ git clone https://github.com/Stefix4/Flappy-Bird.git
     </a>
 
 <h2>Capturi de ecran</h2>
-<img src = "https://github.com/user-attachments/assets/94c23263-8ec7-4b96-9d3f-4d52f09ef994" width="800"/>
-
-<p align="center">
-</p>
-
-<img src = "https://github.com/user-attachments/assets/0cef2134-7a88-4db5-bfd3-f0105107f0b3" width="800"/>
-
-<p align="center">
-</p>
-
-<img src = "https://github.com/user-attachments/assets/d83b7a12-68c3-48c2-8fe0-00a370ee4a21" width="800"/>
+    <p align="center">
+        <img src = "https://github.com/user-attachments/assets/94c23263-8ec7-4b96-9d3f-4d52f09ef994" width="800"/>
+    </p>
+    <p align="center">
+        <img src = "https://github.com/user-attachments/assets/0cef2134-7a88-4db5-bfd3-f0105107f0b3" width="800"/>
+    </p>
+    <p align="center">
+        <img src = "https://github.com/user-attachments/assets/d83b7a12-68c3-48c2-8fe0-00a370ee4a21" width="800"/>
+    </p>
 
 
 
