@@ -19,7 +19,7 @@
 <h2>Limbaj de programare și tehnologii utilizate</h2>
     <ul>
         <li><strong>Limbaj:</strong> C și C++</li>
-        <li><strong>Bibliotecă grafică:</strong></li> [Raylib](include/raylib.h)
+        <li><strong>Bibliotecă grafică:</strong><a href = "/include/raylib.h">Raylib</a></li>
         <li><strong>Fișiere externe:</strong> CSV, texturi PNG, font TTF</li>
     </ul>
 #### **How to compile & run:**
