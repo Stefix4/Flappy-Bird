@@ -7,7 +7,7 @@
 <p align="center">
 </p>
 
-<p align="center"><strong>Joc 2D interactiv în C++ folosind biblioteca raylib</strong></p>
+<p align="center"><strong>Joc 2D interactiv în C++, făcut de la 0 folosind biblioteca Raylib</strong></p>
 
 ---
 
@@ -18,10 +18,19 @@
     </p>
 <h2>Limbaj de programare și tehnologii utilizate</h2>
     <ul>
-        <li><strong>Limbaj:</strong> C și C++</li>
-        <li><strong>Bibliotecă grafică:</strong><a href = "/include/raylib.h">Raylib</a></li>
-        <li><strong>Fișiere externe:</strong> CSV, texturi PNG, font TTF</li>
+        <li><strong>Limbaj: </strong>C și C++</li>
+        <li><strong>Bibliotecă grafică: </strong><a href = "/include/raylib.h">Raylib</a></li>
+        <li><strong>Fișiere externe: </strong>CSV, texturi PNG, font TTF</li>
     </ul>
+<h2>Funcționalități principale</h2>
+    <ul>
+        <li>Interfață grafică interactivă cu Raylib</li>
+        <li>Mișcare realistă a păsării prin gravitație și zbor</li>
+        <li>Coliziuni cu obstacole și marginea ferestrei</li>
+        <li>Sistem de scor și salvare în fișier CSV</li>
+        <li>Meniu cu butoane animate pentru interacțiune</li>
+    </ul>
+
 #### **How to compile & run:**
 
 • Clone repository using:
