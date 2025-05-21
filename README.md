@@ -39,4 +39,11 @@ git clone https://github.com/Stefix4/Flappy-Bird.git
 ```
     • Run the Game file
 
+### Realizatori
+
+<a href="https://github.com/Stefix/Flappy-Bird/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=Stefix/Flappy-Bird" />
+</a>
+
+
 ![image](https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51)
