@@ -35,25 +35,22 @@
 <ol type = "1">
     <li><p>Folosind aplicația Git, urmăriți urmatorii pași:</p></li>
     <ul>
-        <li>Clone repository using:</li>
+        <li>Clone repository using:</li></ul>
 
-        ```bash
-        git clone https://github.com/Stefix4/Flappy-Bird.git
+            ```sh
+            git clone https://github.com/Stefix4/Flappy-Bird.git
             ```
-        
-        <li>Rulați fișierul Game</li>
-        <img src="https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
-    </ul>
-    <li><p>Descarcați fișierele în format ZIP, apoi:</p></li>
-    <ul>
-        <li>Extrageți fișierele</li>
-        <li>Rulați fișierul Game</li>
-        <img src="https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
-    </ul>
+<ul>
+    <li>Rulați fișierul Game</li>
+    <img src="https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
+</ul>
+<li><p>Descarcați fișierele în format ZIP, apoi:</p></li>
+<ul>
+    <li>Extrageți fișierele</li>
+    <li>Rulați fișierul Game</li>
+    <img src="https://github.com/Stefix4/Turn-base-Game/assets/94927709/df2e3525-7f3c-45f3-bdca-a3c2333ead51"/>
+</ul>
 </ol>
-
----
-
 # Realizatori
 
 <a href="https://github.com/Stefix4/Flappy-Bird/graphs/contributors">
