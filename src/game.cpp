@@ -14,6 +14,7 @@ Resources resources;
 
 void loadTextures(){
     resources.logo = LoadImage("./resources/images/flappy-bird-logo.png");
+    if(skinSelected == 0){
     resources.Start_Button=LoadTexture("./resources/images/Start_Button.png");
     resources.fb_flap=LoadTexture("./resources/images/flappy-bird-flaps.png");
     resources.pill1 =LoadTexture("./resources/images/pillar-2.png");
@@ -27,6 +28,22 @@ void loadTextures(){
     resources.Title_Screen = LoadTexture("./resources/images/Title_Screen.png");
     resources.Restart_Button = LoadTexture("./resources/images/Restart_Button.png");
     resources.Restart_ButtonA = LoadTexture("./resources/images/Restart_ButtonA.png");
+    }
+    else if(skinSelected == 1){
+    resources.Start_Button=LoadTexture("./resources/images/Start_Button.png");
+    resources.fb_flap=LoadTexture("./resources/images/bee_flaps.png");
+    resources.pill1 =LoadTexture("./resources/images/pillar-2.png");
+    resources.fb = LoadTexture("./resources/images/bee.png");// fb = flappy bird
+    resources.pill2 =LoadTexture("./resources/images/pillar-1.png");
+    resources.bg = LoadTexture("./resources/images/background2.png");
+    resources.bg_game = LoadTexture("./resources/images/background.png");
+    resources.Start_ButtonA = LoadTexture("./resources/images/Start_ButtonA.png");
+    resources.Exit_Button = LoadTexture("./resources/images/Exit_Button.png");
+    resources.Exit_ButtonA = LoadTexture("./resources/images/Exit_ButtonA.png");
+    resources.Title_Screen = LoadTexture("./resources/images/Title_Screen.png");
+    resources.Restart_Button = LoadTexture("./resources/images/Restart_Button.png");
+    resources.Restart_ButtonA = LoadTexture("./resources/images/Restart_ButtonA.png");
+    }
     resources.novencento = LoadFontFromMemory(".ttf", fileData, fileSize, 40, 0, 0);
 }
 
@@ -68,7 +85,6 @@ int main(void)
     SetWindowMinSize(screenWidth,screenHeight);
 
     //declaring images/textures/font
-    
 
     //game loop
     while (!WindowShouldClose())
@@ -77,7 +93,7 @@ int main(void)
         draw_hb();
         ClearBackground(WHITE);
 
-        mainMenu(resources.pill1, resources.fb, resources.fb_flap, resources.pill2, resources.Start_Button, resources.bg, resources.bg_game, resources.Start_ButtonA, resources.Exit_Button, resources.Exit_ButtonA, resources.Title_Screen, resources.Restart_Button, resources.Restart_ButtonA);
+        mainMenu();
         if(!texture_logo){
             SetWindowIcon(resources.logo);
             texture_logo = true;

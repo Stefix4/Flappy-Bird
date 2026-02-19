@@ -5,10 +5,8 @@
 struct Resources{
     Image logo;
     Texture2D Start_Button;
-    Texture2D fb_flap;
-    Texture2D pill1;
-    Texture2D fb;// fb = flappy bird
     Texture2D pill2 ;
+    Texture2D pill1;
     Texture2D bg;
     Texture2D bg_game;
     Texture2D Start_ButtonA;
@@ -17,6 +15,10 @@ struct Resources{
     Texture2D Title_Screen;
     Texture2D Restart_Button;
     Texture2D Restart_ButtonA;
+    Texture2D fb_flap;
+    Texture2D fb;// fb = flappy bird
+    Texture2D bee;
+    Texture2D bee_flap;
     Font novencento;
 };
 
@@ -34,6 +36,8 @@ extern Texture2D Exit_ButtonA;
 extern Texture2D Title_Screen;
 extern Texture2D Restart_Button;
 extern Texture2D Restart_ButtonA;
+extern Texture2D bee;
+extern Texture2D bee_flap;
 extern Font novencento;
 
 extern unsigned int fileSize ;
