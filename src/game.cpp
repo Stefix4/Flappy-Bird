@@ -7,10 +7,43 @@
 #include "textures.hpp"
 
 int FPS;
-
+float volume_sfx = 0.3f;
+float volume_music = 0.3f;
+float master_volume = 1.0f;
 MenuState currentMenuState = MenuState::MENU;
 
 Resources resources;
+
+void loadSounds(){
+
+    InitAudioDevice();
+    
+    resources.die = LoadSound("./resources/sounds/die.mp3");
+    resources.flap = LoadSound("./resources/sounds/flap.mp3");
+    resources.hit = LoadSound("./resources/sounds/hit.mp3");
+    resources.point = LoadSound("./resources/sounds/point.mp3");    
+    resources.swoosh = LoadSound("./resources/sounds/swoosh.mp3");
+}
+
+void set_sounds_volume(){
+    SetMasterVolume(master_volume);
+    SetSoundVolume(resources.die, volume_sfx);
+    SetSoundVolume(resources.flap, volume_sfx);
+    SetSoundVolume(resources.hit, volume_sfx);
+    SetSoundVolume(resources.point, volume_sfx + 0.1f);
+    SetSoundVolume(resources.swoosh, volume_sfx);
+}
+
+void unloadSounds(){
+
+    UnloadSound(resources.die);
+    UnloadSound(resources.flap);
+    UnloadSound(resources.hit);
+    UnloadSound(resources.point);
+    UnloadSound(resources.swoosh);
+
+    CloseAudioDevice();
+}
 
 void loadTextures(){
     resources.logo = LoadImage("./resources/images/flappy-bird-logo.png");

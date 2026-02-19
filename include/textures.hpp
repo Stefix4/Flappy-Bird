@@ -20,6 +20,11 @@ struct Resources{
     Texture2D bee;
     Texture2D bee_flap;
     Font novencento;
+    Sound die;
+    Sound flap;
+    Sound hit;
+    Sound point;
+    Sound swoosh;
 };
 
 extern Image logo;

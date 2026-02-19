@@ -54,6 +54,8 @@ void animation_button(Texture2D button, float x, float y, float scale, Texture2D
 void mainMenu(){
     if(!textureloaded && game == 1){
         loadTextures();
+        loadSounds();
+        set_sounds_volume();
         textureloaded = true;
     }
     if(IsKeyPressed(KEY_ESCAPE) && menuStateSelected == 1)

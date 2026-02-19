@@ -50,6 +50,7 @@ void birdJump(){
         if(fbf.speed<=0)
         fbf.speed=0;
         fbf.flap();
+        PlaySound(resources.swoosh);
     }
     if(fbf.speed>=1){
         fbf.update_pos();
@@ -172,14 +173,17 @@ void reset_game(){
 void collision(){
     if(CheckCollisionCircleRec(hb.position,hb.radius,wall1.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall1.getupper_pipe())){
         game_over=true;
+        PlaySound(resources.hit);
         reset_game();
     }
     if(CheckCollisionCircleRec(hb.position,hb.radius,wall2.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall2.getupper_pipe())){
         game_over=true;
+        PlaySound(resources.hit);
         reset_game();
     }
     if(fbf.position.y>=780||fbf.position.y<=0){
         game_over=true;
+        PlaySound(resources.die);
         reset_game();
     }
 }
@@ -192,12 +196,15 @@ void counter(){
         score++;
         wall1.speed += 0.05;
         wall2.speed += 0.05;
+        PlaySound(resources.point);
+        
     }
     if(!wall2.pass && ((hb.position.x > wall2.pos_bottom.x) || (hb.position.x > wall2.pos_up.x))){
         wall2.pass = true;
         score++;
         wall1.speed += 0.05;
         wall2.speed += 0.05;
+        PlaySound(resources.point);
     }
     std::ifstream fin("cache.csv");
     fin >> high_score;
