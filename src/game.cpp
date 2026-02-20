@@ -10,6 +10,9 @@ int FPS;
 float volume_sfx = 0.3f;
 float volume_music = 0.3f;
 float master_volume = 1.0f;
+int dev_mode = 0;
+int cheats = 0;
+
 MenuState currentMenuState = MenuState::MENU;
 
 Resources resources;
@@ -17,7 +20,8 @@ Resources resources;
 void loadSounds(){
 
     InitAudioDevice();
-    
+    resources.music = LoadMusicStream("./resources/sounds/music.mp3");
+    resources.music.looping = true;
     resources.die = LoadSound("./resources/sounds/die.mp3");
     resources.flap = LoadSound("./resources/sounds/flap.mp3");
     resources.hit = LoadSound("./resources/sounds/hit.mp3");
@@ -27,6 +31,7 @@ void loadSounds(){
 
 void set_sounds_volume(){
     SetMasterVolume(master_volume);
+    SetMusicVolume(resources.music, volume_music); 
     SetSoundVolume(resources.die, volume_sfx);
     SetSoundVolume(resources.flap, volume_sfx);
     SetSoundVolume(resources.hit, volume_sfx);
@@ -35,7 +40,7 @@ void set_sounds_volume(){
 }
 
 void unloadSounds(){
-
+    UnloadMusicStream(resources.music);
     UnloadSound(resources.die);
     UnloadSound(resources.flap);
     UnloadSound(resources.hit);
@@ -47,35 +52,41 @@ void unloadSounds(){
 
 void loadTextures(){
     resources.logo = LoadImage("./resources/images/flappy-bird-logo.png");
-    if(skinSelected == 0){
     resources.Start_Button=LoadTexture("./resources/images/Start_Button.png");
+    resources.Start_ButtonA = LoadTexture("./resources/images/Start_ButtonA.png");
+    resources.Exit_Button = LoadTexture("./resources/images/Exit_Button.png");
+    resources.Exit_ButtonA = LoadTexture("./resources/images/Exit_ButtonA.png");
+    resources.Title_Screen = LoadTexture("./resources/images/Title_Screen.png");
+    resources.Restart_Button = LoadTexture("./resources/images/Restart_Button.png");
+    resources.Restart_ButtonA = LoadTexture("./resources/images/Restart_ButtonA.png");
+    resources.Resume_Button = LoadTexture("./resources/images/Resume_Button.png");
+    resources.Resume_ButtonA = LoadTexture("./resources/images/Resume_ButtonA.png");
+    resources.Menu_Button = LoadTexture("./resources/images/Menu_Button.png");
+    resources.Menu_ButtonA = LoadTexture("./resources/images/Menu_ButtonA.png");
+    resources.Options_Button = LoadTexture("./resources/images/Options_Button.png");
+    resources.Options_ButtonA = LoadTexture("./resources/images/Options_ButtonA.png");  
+    resources.Skins_Button = LoadTexture("./resources/images/Skins_Button.png");
+    resources.Skins_ButtonA = LoadTexture("./resources/images/Skins_ButtonA.png");
+    resources.bee = LoadTexture("./resources/images/bee.png");
+    resources.bee_flap = LoadTexture("./resources/images/bee_flaps.png");
+    resources.flappy_bird = LoadTexture("./resources/images/flappy-bird.png");
+    resources.flappy_bird_flap = LoadTexture("./resources/images/flappy-bird-flaps.png");
+
+    if(skinSelected == 1){ // green skin
     resources.fb_flap=LoadTexture("./resources/images/flappy-bird-flaps.png");
     resources.pill1 =LoadTexture("./resources/images/pillar-2.png");
     resources.fb = LoadTexture("./resources/images/flappy-bird.png");// fb = flappy bird
     resources.pill2 =LoadTexture("./resources/images/pillar-1.png");
     resources.bg = LoadTexture("./resources/images/background2.png");
     resources.bg_game = LoadTexture("./resources/images/background.png");
-    resources.Start_ButtonA = LoadTexture("./resources/images/Start_ButtonA.png");
-    resources.Exit_Button = LoadTexture("./resources/images/Exit_Button.png");
-    resources.Exit_ButtonA = LoadTexture("./resources/images/Exit_ButtonA.png");
-    resources.Title_Screen = LoadTexture("./resources/images/Title_Screen.png");
-    resources.Restart_Button = LoadTexture("./resources/images/Restart_Button.png");
-    resources.Restart_ButtonA = LoadTexture("./resources/images/Restart_ButtonA.png");
     }
-    else if(skinSelected == 1){
-    resources.Start_Button=LoadTexture("./resources/images/Start_Button.png");
-    resources.fb_flap=LoadTexture("./resources/images/bee_flaps.png");
-    resources.pill1 =LoadTexture("./resources/images/pillar-2.png");
-    resources.fb = LoadTexture("./resources/images/bee.png");// fb = flappy bird
-    resources.pill2 =LoadTexture("./resources/images/pillar-1.png");
+    else if(skinSelected == 2){ // bee skin
+    resources.fb = resources.bee;
+    resources.fb_flap = resources.bee_flap;
+    resources.pill1 =LoadTexture("./resources/images/branch-2.png");
+    resources.pill2 =LoadTexture("./resources/images/branch-1.png");
     resources.bg = LoadTexture("./resources/images/background2.png");
     resources.bg_game = LoadTexture("./resources/images/background.png");
-    resources.Start_ButtonA = LoadTexture("./resources/images/Start_ButtonA.png");
-    resources.Exit_Button = LoadTexture("./resources/images/Exit_Button.png");
-    resources.Exit_ButtonA = LoadTexture("./resources/images/Exit_ButtonA.png");
-    resources.Title_Screen = LoadTexture("./resources/images/Title_Screen.png");
-    resources.Restart_Button = LoadTexture("./resources/images/Restart_Button.png");
-    resources.Restart_ButtonA = LoadTexture("./resources/images/Restart_ButtonA.png");
     }
     resources.novencento = LoadFontFromMemory(".ttf", fileData, fileSize, 40, 0, 0);
 }
@@ -96,6 +107,12 @@ void unloadTextures(){
     UnloadTexture(resources.Title_Screen);
     UnloadTexture(resources.Restart_Button);
     UnloadTexture(resources.Restart_ButtonA);
+    UnloadTexture(resources.Menu_Button);
+    UnloadTexture(resources.Menu_ButtonA);
+    UnloadTexture(resources.Options_Button);
+    UnloadTexture(resources.Options_ButtonA);
+    UnloadTexture(resources.Skins_Button);
+    UnloadTexture(resources.Skins_ButtonA);
     UnloadFont(resources.novencento);
     TraceLog(LOG_INFO, "Unloaded resources succesfully");
 }
@@ -106,11 +123,11 @@ unsigned char* fileData = LoadFileData("./resources/font/PressStart2P-Regular.tt
 int main(void)
 {
     SetTargetFPS(144);
+
     
     const int screenWidth = 1280;
     const int screenHeight = 720;
     bool texture_logo = false;
-    
 
     //initialling the window
     InitWindow(screenWidth,screenHeight, "Flappy Bird");
@@ -120,12 +137,20 @@ int main(void)
     //declaring images/textures/font
 
     //game loop
-    while (!WindowShouldClose())
-    {   
+    while (!WindowShouldClose()){   
         BeginDrawing();
         draw_hb();
         ClearBackground(WHITE);
-
+        
+        if(IsKeyDown(KEY_TAB) && IsKeyDown(KEY_D) && dev_mode == 0)
+            dev_mode = 1;
+        else if(IsKeyDown(KEY_LEFT_SHIFT) && IsKeyDown(KEY_D) && dev_mode == 1)
+            dev_mode = 0;
+        if(IsKeyDown(KEY_TAB) && IsKeyDown(KEY_C) && cheats == 0)
+            cheats = 1;
+        else if(IsKeyDown(KEY_LEFT_SHIFT) && (IsKeyDown(KEY_C) && cheats == 1))
+            cheats = 0;
+            
         mainMenu();
         if(!texture_logo){
             SetWindowIcon(resources.logo);
@@ -148,10 +173,12 @@ int main(void)
             break;
         }
     
+        
         EndDrawing();
     }
     
     unloadTextures();
+    unloadSounds();
     
     TraceLog(LOG_INFO, "Closing window...");
 

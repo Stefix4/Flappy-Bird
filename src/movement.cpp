@@ -121,18 +121,26 @@ struct pipe{
         x_pos-=speed;
     }
 
-    void create(Texture2D pill1,Texture2D pill2) {     
-        DrawRectangleRec(getlower_pipe(), BLACK);
-        DrawRectangleRec(getupper_pipe(), BLACK);
+    void create(Texture2D pill1,Texture2D pill2) {  
+        if(dev_mode == 1){
+            DrawRectangleRec(getlower_pipe(),WHITE);
+            DrawRectangleRec(getupper_pipe(),WHITE);   
+        }
         DrawTextureEx(resources.pill1,tex_pos_bottom,0,5,WHITE);
         DrawTextureEx(resources.pill2,tex_pos_up,0,5,WHITE);   
     }
 
     Rectangle getlower_pipe(){
-        return Rectangle {pos_bottom.x,pos_bottom.y,size_bottom.x,size_bottom.y};
+        if(skinSelected == 2)
+            return Rectangle {pos_bottom.x + 20,pos_bottom.y,size_bottom.x - 20,size_bottom.y};
+        else
+            return Rectangle {pos_bottom.x,pos_bottom.y,size_bottom.x,size_bottom.y};
     }
     Rectangle getupper_pipe(){
-        return Rectangle {pos_up.x,pos_up.y,size_up.x,size_up.y};
+        if(skinSelected == 2)
+            return Rectangle {pos_up.x + 20,pos_up.y,size_up.x - 20,size_up.y};
+        else
+            return Rectangle {pos_up.x,pos_up.y,size_up.x,size_up.y};
     }
     void movement(Texture2D pill1,Texture2D pill2){
         create(pill1,pill2);
@@ -171,20 +179,28 @@ void reset_game(){
 }
 
 void collision(){
-    if(CheckCollisionCircleRec(hb.position,hb.radius,wall1.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall1.getupper_pipe())){
-        game_over=true;
-        PlaySound(resources.hit);
-        reset_game();
+    if(cheats == 0){    
+        if(CheckCollisionCircleRec(hb.position,hb.radius,wall1.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall1.getupper_pipe())){
+            game_over = true;
+            PlaySound(resources.hit);
+            reset_game();
+        }
+        if(CheckCollisionCircleRec(hb.position,hb.radius,wall2.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall2.getupper_pipe())){
+            game_over = true;
+            PlaySound(resources.hit);
+            reset_game();
+        }
+        if(fbf.position.y >= 780 || fbf.position.y <= -40){
+            game_over = true;
+            PlaySound(resources.die);
+            reset_game();
+        }
     }
-    if(CheckCollisionCircleRec(hb.position,hb.radius,wall2.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall2.getupper_pipe())){
-        game_over=true;
-        PlaySound(resources.hit);
-        reset_game();
-    }
-    if(fbf.position.y>=780||fbf.position.y<=0){
-        game_over=true;
-        PlaySound(resources.die);
-        reset_game();
+    else{
+        if(fbf.position.y >= 780){
+            fbf.position.y = 780;
+            fbf.speed = 0;
+        }
     }
 }
 

@@ -12,3 +12,6 @@ void unloadTextures();
 void loadSounds();
 void unloadSounds();
 void set_sounds_volume();
+
+extern int dev_mode;
+extern int cheats;

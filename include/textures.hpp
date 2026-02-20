@@ -15,6 +15,16 @@ struct Resources{
     Texture2D Title_Screen;
     Texture2D Restart_Button;
     Texture2D Restart_ButtonA;
+    Texture2D Menu_Button;
+    Texture2D Menu_ButtonA;
+    Texture2D Resume_Button;
+    Texture2D Resume_ButtonA;
+    Texture2D Options_Button;
+    Texture2D Options_ButtonA;
+    Texture2D Skins_Button;
+    Texture2D Skins_ButtonA;
+    Texture2D flappy_bird;
+    Texture2D flappy_bird_flap;
     Texture2D fb_flap;
     Texture2D fb;// fb = flappy bird
     Texture2D bee;
@@ -25,6 +35,7 @@ struct Resources{
     Sound hit;
     Sound point;
     Sound swoosh;
+    Music music;
 };
 
 extern Image logo;
