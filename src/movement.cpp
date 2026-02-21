@@ -179,7 +179,7 @@ void reset_game(){
 }
 
 void collision(){
-    if(cheats == 0){    
+    if(cheats != 1){    
         if(CheckCollisionCircleRec(hb.position,hb.radius,wall1.getlower_pipe()) || CheckCollisionCircleRec(hb.position,hb.radius,wall1.getupper_pipe())){
             game_over = true;
             PlaySound(resources.hit);
@@ -204,7 +204,7 @@ void collision(){
     }
 }
 
-void counter(){
+void show_counter(){
     DrawTextEx(resources.novencento,TextFormat("Score:%d", score), Vector2{10, 10}, 40, -3,WHITE);
     
     if(!wall1.pass && ((hb.position.x > wall1.pos_bottom.x) || (hb.position.x > wall1.pos_up.x))){
@@ -222,6 +222,21 @@ void counter(){
         wall2.speed += 0.05;
         PlaySound(resources.point);
     }
+    std::ifstream fin("cache.csv");
+    fin >> high_score;
+    if(high_score > highest_score)
+        highest_score = high_score;
+
+    final_score=score;
+    
+    if(highest_score < final_score){
+        std::ofstream fout("cache.csv");
+        highest_score = final_score;
+        fout << highest_score;
+    }
+    
+}
+void counter(){
     std::ifstream fin("cache.csv");
     fin >> high_score;
     if(high_score > highest_score)

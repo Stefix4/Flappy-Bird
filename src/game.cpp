@@ -6,12 +6,18 @@
 #include "game.hpp"
 #include "textures.hpp"
 
-int FPS;
+int FPS = 144;
 float volume_sfx = 0.3f;
 float volume_music = 0.3f;
 float master_volume = 1.0f;
-int dev_mode = 0;
-int cheats = 0;
+float* master_volume_ptr = &master_volume;
+int dev_skins = -1;
+int dev_mode = -1;
+int cheats = -1;
+float timedev = 2.0f * FPS / 10.0f;
+float timeskins = 2.0f * FPS / 10.0f;
+float timecheats = 2.0f * FPS / 10.0f;
+
 
 MenuState currentMenuState = MenuState::MENU;
 
@@ -51,40 +57,46 @@ void unloadSounds(){
 }
 
 void loadTextures(){
-    resources.logo = LoadImage("./resources/images/flappy-bird-logo.png");
-    resources.Start_Button=LoadTexture("./resources/images/Start_Button.png");
-    resources.Start_ButtonA = LoadTexture("./resources/images/Start_ButtonA.png");
-    resources.Exit_Button = LoadTexture("./resources/images/Exit_Button.png");
-    resources.Exit_ButtonA = LoadTexture("./resources/images/Exit_ButtonA.png");
     resources.Title_Screen = LoadTexture("./resources/images/Title_Screen.png");
-    resources.Restart_Button = LoadTexture("./resources/images/Restart_Button.png");
-    resources.Restart_ButtonA = LoadTexture("./resources/images/Restart_ButtonA.png");
-    resources.Resume_Button = LoadTexture("./resources/images/Resume_Button.png");
-    resources.Resume_ButtonA = LoadTexture("./resources/images/Resume_ButtonA.png");
-    resources.Menu_Button = LoadTexture("./resources/images/Menu_Button.png");
-    resources.Menu_ButtonA = LoadTexture("./resources/images/Menu_ButtonA.png");
-    resources.Options_Button = LoadTexture("./resources/images/Options_Button.png");
-    resources.Options_ButtonA = LoadTexture("./resources/images/Options_ButtonA.png");  
-    resources.Skins_Button = LoadTexture("./resources/images/Skins_Button.png");
-    resources.Skins_ButtonA = LoadTexture("./resources/images/Skins_ButtonA.png");
-    resources.bee = LoadTexture("./resources/images/bee.png");
-    resources.bee_flap = LoadTexture("./resources/images/bee_flaps.png");
-    resources.flappy_bird = LoadTexture("./resources/images/flappy-bird.png");
-    resources.flappy_bird_flap = LoadTexture("./resources/images/flappy-bird-flaps.png");
+    resources.logo = LoadImage("./resources/images/flappy-bird-logo.png");
+    resources.Start_Button=LoadTexture("./resources/images/buttons/Start_Button.png");
+    resources.Start_ButtonA = LoadTexture("./resources/images/buttons/Start_ButtonA.png");
+    resources.Exit_Button = LoadTexture("./resources/images/buttons/Exit_Button.png");
+    resources.Exit_ButtonA = LoadTexture("./resources/images/buttons/Exit_ButtonA.png");
+    resources.Restart_Button = LoadTexture("./resources/images/buttons/Restart_Button.png");
+    resources.Restart_ButtonA = LoadTexture("./resources/images/buttons/Restart_ButtonA.png");
+    resources.Resume_Button = LoadTexture("./resources/images/buttons/Resume_Button.png");
+    resources.Resume_ButtonA = LoadTexture("./resources/images/buttons/Resume_ButtonA.png");
+    resources.Menu_Button = LoadTexture("./resources/images/buttons/Menu_Button.png");
+    resources.Menu_ButtonA = LoadTexture("./resources/images/buttons/Menu_ButtonA.png");
+    resources.Options_Button = LoadTexture("./resources/images/buttons/Options_Button.png");
+    resources.Options_ButtonA = LoadTexture("./resources/images/buttons/Options_ButtonA.png");  
+    resources.Skins_Button = LoadTexture("./resources/images/buttons/Skins_Button.png");
+    resources.Skins_ButtonA = LoadTexture("./resources/images/buttons/Skins_ButtonA.png");
+    resources.bee = LoadTexture("./resources/images/bee/bee.png");
+    resources.bee_flap = LoadTexture("./resources/images/bee/bee_flaps.png");
+    resources.flappy_bird = LoadTexture("./resources/images/flappy-bird/flappy-bird.png");
+    resources.flappy_bird_flap = LoadTexture("./resources/images/flappy-bird/flappy-bird-flaps.png");
+    resources.bee_skin = LoadTexture("./resources/images/bee/bee_skin.png");
+    resources.bee_skinA = LoadTexture("./resources/images/bee/bee_skinA.png");
+    resources.bee_skin_selected = LoadTexture("./resources/images/bee/bee_skin_selected.png");
+    resources.bee_skin_selectedA = LoadTexture("./resources/images/bee/bee_skin_selectedA.png");
+    resources.bee_skin_locked1 = LoadTexture("./resources/images/bee/bee_skin_locked1.png");
+    resources.bee_skin_locked2 = LoadTexture("./resources/images/bee/bee_skin_locked2.png");
 
     if(skinSelected == 1){ // green skin
-    resources.fb_flap=LoadTexture("./resources/images/flappy-bird-flaps.png");
-    resources.pill1 =LoadTexture("./resources/images/pillar-2.png");
-    resources.fb = LoadTexture("./resources/images/flappy-bird.png");// fb = flappy bird
-    resources.pill2 =LoadTexture("./resources/images/pillar-1.png");
+    resources.fb_flap=LoadTexture("./resources/images/flappy-bird/flappy-bird-flaps.png");
+    resources.pill1 =LoadTexture("./resources/images/flappy-bird/pillar-2.png");
+    resources.fb = LoadTexture("./resources/images/flappy-bird/flappy-bird.png");// fb = flappy bird
+    resources.pill2 =LoadTexture("./resources/images/flappy-bird/pillar-1.png");
     resources.bg = LoadTexture("./resources/images/background2.png");
     resources.bg_game = LoadTexture("./resources/images/background.png");
     }
     else if(skinSelected == 2){ // bee skin
     resources.fb = resources.bee;
     resources.fb_flap = resources.bee_flap;
-    resources.pill1 =LoadTexture("./resources/images/branch-2.png");
-    resources.pill2 =LoadTexture("./resources/images/branch-1.png");
+    resources.pill1 =LoadTexture("./resources/images/bee/branch-2.png");
+    resources.pill2 =LoadTexture("./resources/images/bee/branch-1.png");
     resources.bg = LoadTexture("./resources/images/background2.png");
     resources.bg_game = LoadTexture("./resources/images/background.png");
     }
@@ -117,16 +129,20 @@ void unloadTextures(){
     TraceLog(LOG_INFO, "Unloaded resources succesfully");
 }
 
-unsigned int fileSize = 0;
+int fileSize;
 unsigned char* fileData = LoadFileData("./resources/font/PressStart2P-Regular.ttf", &fileSize);
+
 
 int main(void)
 {
-    SetTargetFPS(144);
-
+    SetTargetFPS(FPS);
+    
     
     const int screenWidth = 1280;
     const int screenHeight = 720;
+
+    Vector2 notification_position = {screenWidth / 2 - 300, 10};
+
     bool texture_logo = false;
 
     //initialling the window
@@ -141,15 +157,6 @@ int main(void)
         BeginDrawing();
         draw_hb();
         ClearBackground(WHITE);
-        
-        if(IsKeyDown(KEY_TAB) && IsKeyDown(KEY_D) && dev_mode == 0)
-            dev_mode = 1;
-        else if(IsKeyDown(KEY_LEFT_SHIFT) && IsKeyDown(KEY_D) && dev_mode == 1)
-            dev_mode = 0;
-        if(IsKeyDown(KEY_TAB) && IsKeyDown(KEY_C) && cheats == 0)
-            cheats = 1;
-        else if(IsKeyDown(KEY_LEFT_SHIFT) && (IsKeyDown(KEY_C) && cheats == 1))
-            cheats = 0;
             
         mainMenu();
         if(!texture_logo){
@@ -171,6 +178,58 @@ int main(void)
         }
         else{
             break;
+        }
+        ///Dev_mode///
+        if(IsKeyDown(KEY_TAB) && IsKeyDown(KEY_D) && dev_mode != 1){
+            dev_mode = 1;
+            timedev = 2.0f * FPS / 10.0f;
+        }
+        if(dev_mode == 1 && timedev > 0){
+            timedev = notify("Developer Mode Activated", timedev,notification_position, 40, WHITE, -3);
+            TraceLog(LOG_ERROR, "Developer Mode Activated");
+        }
+        if(IsKeyDown(KEY_LEFT_SHIFT) && IsKeyDown(KEY_D) && dev_mode == 1){
+            dev_mode = 0;
+            timedev = 2.0f * FPS / 10.0f;
+        }
+        if(dev_mode == 0 && timedev > 0){
+            timedev = notify("Developer Mode Deactivated", timedev,notification_position, 40, WHITE, -3);
+            TraceLog(LOG_ERROR, "Developer Mode Deactivated");
+        }
+        ///Dev_skins///
+        if(IsKeyDown(KEY_TAB) && IsKeyDown(KEY_S) && dev_skins != 1){
+            dev_skins = 1;
+            timeskins = 2.0f * FPS / 10.0f;
+        }
+        if(dev_skins == 1 && timeskins > 0){
+            timeskins = notify("Developer Skins Activated", timeskins,notification_position, 40, WHITE, -3);
+            TraceLog(LOG_ERROR, "Developer Skins Activated");
+        }
+        if(IsKeyDown(KEY_LEFT_SHIFT) && IsKeyDown(KEY_S) && dev_skins == 1){
+            dev_skins = 0;
+            timeskins = 2.0f * FPS / 10.0f;
+        }
+        if(dev_skins == 0 && timeskins > 0){
+            timeskins = notify("Developer Skins Deactivated", timeskins, notification_position, 40, WHITE, -3);
+            TraceLog(LOG_ERROR, "Developer Skins Deactivated");
+        }  
+        ///Cheats///
+        if(IsKeyDown(KEY_TAB) && IsKeyDown(KEY_C) && cheats != 1){
+            cheats = 1;
+            timecheats = 2.0f * FPS / 10.0f;
+        }
+        if(cheats == 1 && timecheats > 0){   
+            timecheats = notify("Cheats Activated", timecheats,notification_position, 40, WHITE, -3);
+            TraceLog(LOG_ERROR, "Cheats Activated");
+        }
+        
+        if(IsKeyDown(KEY_LEFT_SHIFT) && (IsKeyDown(KEY_C)) && cheats == 1){
+            cheats = 0;
+            timecheats = 2.0f * FPS / 10.0f;
+        }
+        if(cheats == 0 && timecheats > 0){
+            timecheats = notify("Cheats Deactivated", timecheats, notification_position, 40, WHITE, -3);
+            TraceLog(LOG_ERROR, "Cheats Dectivated");
         }
     
         

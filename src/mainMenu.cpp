@@ -3,8 +3,10 @@
 #include "game.hpp"
 #include "textures.hpp"
 
-#include <raylib.h>
+#include "raylib.h"
+//#include "raygui.h"
 #include <iostream>
+#include <fstream>
 #include <math.h>
 
 int game = 1;
@@ -28,6 +30,12 @@ Rectangle Skins_hb = {0, 0, 184, 130};
 Rectangle Menu_Button_hb = {0, 0, 156, 50};
 
 float A = 0, B = 0, speed = 0.0f;
+
+float notify(const char* message, float duration, Vector2 position, int size, Color color, int spacing){
+    DrawTextEx(resources.novencento, message, position, size, spacing, color);
+    duration -= 0.1f;
+    return duration;
+}
 
 void animation_button(Texture2D button, float x, float y, float scale, Texture2D buttonA, int menuState, float radius, int direction = 1, float up_speed = 0.01f, Rectangle hitbox = {0, 0, 0, 0}, int skin = 0){
     srand(seed);
@@ -110,6 +118,8 @@ void mainMenu(){
     if(IsKeyPressed(KEY_ESCAPE) && menuStateSelected == 0)
         menuStateSelected = 2;
     
+    /////////////// Main Menu ///////////////
+
     if(menuStateSelected == 0){
         DrawTextureEx(resources.bg, Vector2{0, 0}, 0, 1.6f, WHITE);
         animation_button(resources.Title_Screen,backgroundWidth / 2 - 230, 0, 5.0f, resources.Title_Screen, 0, 25.0f, 1, 0.0035f);
@@ -123,17 +133,21 @@ void mainMenu(){
         animation_button(resources.Skins_Button,backgroundWidth / 2 - 180, backgroundHeight - 200, 1.6f, resources.Skins_ButtonA, 6, button_radius, button_direction, button_speed, Skins_hb);
     }
 
+    /////////////// Gameplay ///////////////
+
     else if(menuStateSelected == 1){
         SetMusicVolume(resources.music, game_music);
         drawing(resources.fb, resources.fb_flap, resources.bg_game);
         birdJump();
         update_hb();
         pipe_movement(resources.pill1, resources.pill2);
-        counter();
+        show_counter();
         collision();
         
     }
     
+    /////////////// Game Over Menu ///////////////
+
     else if(menuStateSelected == 3){
         const char* title = "GAME OVER";
         const char* line1 = TextFormat("Your Score:%d", final_score);
@@ -160,6 +174,8 @@ void mainMenu(){
         animation_button(resources.Exit_Button, backgroundWidth - 180, backgroundHeight - 180, 1.6f, resources.Exit_ButtonA, 2, button_radius, -1, button_speed, ExitButton_hb);
     }
     
+    /////////////// Pause Menu ///////////////
+
     else if(menuStateSelected == 4){
         const char* title = "GAME PAUSED";
         const char* line1 = "Are you sure";
@@ -186,13 +202,19 @@ void mainMenu(){
         animation_button(resources.Exit_Button,backgroundWidth - 180, backgroundHeight - 180, 1.6f, resources.Exit_ButtonA, 2, button_radius, button_direction, button_speed, ExitButton_hb);
     }
     
+    /////////////// Exit Game ///////////////
+
     else if(menuStateSelected == 2){
         game = 0;
         EndDrawing();
     }
     
+    /////////////// Options Menu ///////////////
+
     else if(menuStateSelected == 5){
         DrawTextureEx(resources.bg, Vector2{0, 0}, 0, 1.6f, WHITE);
+
+        //master_volume = GuiSlider((Rectangle){300, 250, 200, 20}, "Master Volume", TextFormat("%.2f", master_volume_ptr), master_volume_ptr, 0.0f, 1.0f);
     
         //Skins Button animation
         animation_button(resources.Options_Button,backgroundWidth / 2 - 215, -50, 4.5f, resources.Options_ButtonA, 5, button_radius, button_direction, button_speed);
@@ -201,18 +223,37 @@ void mainMenu(){
         animation_button(resources.Menu_Button,backgroundWidth - 180, backgroundHeight - 190, 1.6f, resources.Menu_ButtonA, 0, button_radius + 2.0f, 1, button_speed + 0.015f, Menu_Button_hb);
     }
 
+    /////////////// Skins Menu ///////////////
+
     else if(menuStateSelected == 6){
         DrawTextureEx(resources.bg, Vector2{0, 0}, 0, 1.6f, WHITE);
-        // DrawTextEx(resources.novencento, "Skins", Vector2{backgroundWidth / 2 - 180, 45}, 80, -5, WHITE);
 
+        std::ifstream fin("cache.csv");
+        fin >> highest_score;
+
+        int skins[] = {1, 1, 1};
+
+        if(highest_score>= 15 || dev_skins == 1)
+            skins[1] = 2;
+        else
+            skins[1] = 1;
+        
         //Skins Button animation
         animation_button(resources.Skins_Button,backgroundWidth / 2 - 225, -50, 4.5f, resources.Skins_ButtonA, 6, button_radius, button_direction, button_speed);
         
-        //Bee Skin Button animation
-        animation_button(resources.bee,backgroundWidth /2 - 300, backgroundHeight / 2 - 40, 1.0f, resources.bee_flap, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, 2);
+        //Locked Bee Skin
+        if(highest_score < 15 && dev_skins != 1)
+            animation_button(resources.bee_skin_locked2,backgroundWidth /2 - 300, backgroundHeight / 2 - 40, 1.0f, resources.bee_skin_locked1, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[0]);
+        else{
+            //Bee Skin Button animation
+            if(skinSelected == 2 || dev_skins == 1)
+                animation_button(resources.bee_skin,backgroundWidth /2 - 300, backgroundHeight / 2 - 40, 1.0f, resources.bee_skinA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[1]);
+            else if(skinSelected != 1 || dev_skins != 1)
+                    animation_button(resources.bee_skin_selected,backgroundWidth /2 - 300, backgroundHeight / 2 - 40, 1.0f, resources.bee_skin_selectedA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[1]);
+        }
         
         //Flappy Bird Skin Button animation
-        animation_button(resources.flappy_bird,backgroundWidth /2 + 100, backgroundHeight / 2 - 40, 1.0f, resources.flappy_bird_flap, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, 1);
+        animation_button(resources.flappy_bird,backgroundWidth /2 + 100, backgroundHeight / 2 - 40, 1.0f, resources.flappy_bird_flap, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[0]);
         
         // Menu Button animation
         animation_button(resources.Menu_Button,backgroundWidth - 180, backgroundHeight - 190, 1.6f, resources.Menu_ButtonA, 0, button_radius + 2.0f, 1, button_speed + 0.015f, Menu_Button_hb);

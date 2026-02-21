@@ -9,5 +9,7 @@ extern Rectangle StartButton_hb;
 extern Rectangle ExitButton_hb;
 extern Rectangle RestartButton_hb;
 
+float notify(const char * message, float duration, Vector2 position, int size, Color color, int spacing);
+
 extern int game;
 extern int skinSelected;

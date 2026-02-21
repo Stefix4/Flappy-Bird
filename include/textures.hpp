@@ -29,6 +29,12 @@ struct Resources{
     Texture2D fb;// fb = flappy bird
     Texture2D bee;
     Texture2D bee_flap;
+    Texture2D bee_skin;
+    Texture2D bee_skinA;
+    Texture2D bee_skin_selected;
+    Texture2D bee_skin_selectedA;
+    Texture2D bee_skin_locked1;
+    Texture2D bee_skin_locked2;
     Font novencento;
     Sound die;
     Sound flap;
@@ -56,7 +62,7 @@ extern Texture2D bee;
 extern Texture2D bee_flap;
 extern Font novencento;
 
-extern unsigned int fileSize ;
+extern int fileSize ;
 extern unsigned char* fileData;
 
 extern Resources resources;
