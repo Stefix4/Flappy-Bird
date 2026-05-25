@@ -133,12 +133,16 @@ struct pipe{
     Rectangle getlower_pipe(){
         if(skinSelected == 2)
             return Rectangle {pos_bottom.x + 20,pos_bottom.y,size_bottom.x - 20,size_bottom.y};
+        else if(skinSelected == 3)
+            return Rectangle {pos_bottom.x + 50,pos_bottom.y,size_bottom.x,size_bottom.y};
         else
             return Rectangle {pos_bottom.x,pos_bottom.y,size_bottom.x,size_bottom.y};
     }
     Rectangle getupper_pipe(){
         if(skinSelected == 2)
             return Rectangle {pos_up.x + 20,pos_up.y,size_up.x - 20,size_up.y};
+        else if(skinSelected == 3)
+            return Rectangle {pos_up.x + 70,pos_up.y,size_up.x - 30,size_up.y};
         else
             return Rectangle {pos_up.x,pos_up.y,size_up.x,size_up.y};
     }
@@ -259,7 +263,9 @@ void counter(){
                                                     ////////////////
 
 void drawing(Texture2D fb, Texture2D fb_flap,Texture2D bg_game){
+    
     DrawTextureEx(resources.bg_game,Vector2{0,0},0,1.6f,WHITE);
+
     if(!(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(fbf.speed>=0&&fbf.speed<=4.75)))
         DrawTextureEx(resources.fb,fbf.position,0,0.75, WHITE);
     if(IsKeyPressed(KEY_SPACE)||IsMouseButtonPressed(MOUSE_BUTTON_LEFT)||(fbf.speed>=0&&fbf.speed<=4.75)){

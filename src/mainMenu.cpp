@@ -15,7 +15,7 @@ int menuStateSelected = 0;
 const int backgroundWidth = 1280;
 const int backgroundHeight = 780;
 bool textureloaded = false;
-int skinSelected = 1;
+int skinSelected = 3;
 float game_music = 0.2f;
 int seed = 5;
 float button_speed = 0.0025f;
@@ -121,7 +121,9 @@ void mainMenu(){
     /////////////// Main Menu ///////////////
 
     if(menuStateSelected == 0){
+
         DrawTextureEx(resources.bg, Vector2{0, 0}, 0, 1.6f, WHITE);
+
         animation_button(resources.Title_Screen,backgroundWidth / 2 - 230, 0, 5.0f, resources.Title_Screen, 0, 25.0f, 1, 0.0035f);
         //Start Button animation
         animation_button(resources.Start_Button,backgroundWidth / 2 - 80, backgroundHeight / 2 + 100, 1.6f, resources.Start_ButtonA, 1, button_radius, button_direction, button_speed, StartButton_hb);
@@ -153,7 +155,7 @@ void mainMenu(){
         const char* line1 = TextFormat("Your Score:%d", final_score);
         const char* line2 = TextFormat("Highest Score is:%d", highest_score);
 
-        DrawTextureEx(resources.bg, Vector2{0, 0}, 0, 1.6f, WHITE);
+        DrawTextureEx(resources.bg,Vector2{0,0},0,1.6f,WHITE);
         
         Vector2 sizeTitle = MeasureTextEx(resources.novencento, title, 90, -5);
         DrawTextEx(resources.novencento, title, Vector2{(backgroundWidth - sizeTitle.x) / 2, 45}, 90, -5, WHITE);
@@ -193,10 +195,7 @@ void mainMenu(){
         DrawTextEx(resources.novencento, line2, Vector2{(backgroundWidth - sizeLine2.x) / 2, 320}, 50, -4, WHITE);
 
         //Restart Button animation
-        animation_button(resources.Resume_Button,backgroundWidth / 2 - 80, backgroundHeight / 2 + 80, 1.6f, resources.Resume_ButtonA, 1, button_radius, button_direction, button_speed, RestartButton_hb);
-
-        //Options Button animation
-        animation_button(resources.Options_Button,backgroundWidth / 2 + 20, backgroundHeight - 200, 1.6f, resources.Options_ButtonA, 5, button_radius, button_direction, button_speed, RestartButton_hb);
+        animation_button(resources.Resume_Button,backgroundWidth / 2 - 80, backgroundHeight - 190, 1.6f, resources.Resume_ButtonA, 1, button_radius, button_direction, button_speed, RestartButton_hb);
 
         //Exit Button animation
         animation_button(resources.Exit_Button,backgroundWidth - 180, backgroundHeight - 180, 1.6f, resources.Exit_ButtonA, 2, button_radius, button_direction, button_speed, ExitButton_hb);
@@ -212,7 +211,8 @@ void mainMenu(){
     /////////////// Options Menu ///////////////
 
     else if(menuStateSelected == 5){
-        DrawTextureEx(resources.bg, Vector2{0, 0}, 0, 1.6f, WHITE);
+
+        DrawTextureEx(resources.bg,Vector2{0,0},0,1.6f,WHITE);
 
         //master_volume = GuiSlider((Rectangle){300, 250, 200, 20}, "Master Volume", TextFormat("%.2f", master_volume_ptr), master_volume_ptr, 0.0f, 1.0f);
     
@@ -226,34 +226,56 @@ void mainMenu(){
     /////////////// Skins Menu ///////////////
 
     else if(menuStateSelected == 6){
-        DrawTextureEx(resources.bg, Vector2{0, 0}, 0, 1.6f, WHITE);
+
+        DrawTextureEx(resources.bg,Vector2{0,0},0,1.6f,WHITE);
 
         std::ifstream fin("cache.csv");
         fin >> highest_score;
 
-        int skins[] = {1, 1, 1};
+        int skins[] = {3, 1, 1};
 
-        if(highest_score>= 15 || dev_skins == 1)
+        if(highest_score >= 15 || dev_skins == 1)
             skins[1] = 2;
-        else
-            skins[1] = 1;
-        
+        else if(highest_score >= 30 || dev_skins == 1)
+            skins[2] = 1;
+        else{
+            skins[1] = 3;
+            skins[2] = 3;
+        }
         //Skins Button animation
         animation_button(resources.Skins_Button,backgroundWidth / 2 - 225, -50, 4.5f, resources.Skins_ButtonA, 6, button_radius, button_direction, button_speed);
         
-        //Locked Bee Skin
-        if(highest_score < 15 && dev_skins != 1)
-            animation_button(resources.bee_skin_locked2,backgroundWidth /2 - 300, backgroundHeight / 2 - 40, 1.0f, resources.bee_skin_locked1, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[0]);
+        //Locked Bee Skin 
+        if(highest_score < 15 && dev_skins != 1){
+            animation_button(resources.bee_skin_locked1,backgroundWidth /2 - 100, backgroundHeight / 2 - 40, 1.0f, resources.bee_skin_locked2, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skinSelected);
+        }
         else{
             //Bee Skin Button animation
-            if(skinSelected == 2 || dev_skins == 1)
-                animation_button(resources.bee_skin,backgroundWidth /2 - 300, backgroundHeight / 2 - 40, 1.0f, resources.bee_skinA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[1]);
-            else if(skinSelected != 1 || dev_skins != 1)
-                    animation_button(resources.bee_skin_selected,backgroundWidth /2 - 300, backgroundHeight / 2 - 40, 1.0f, resources.bee_skin_selectedA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[1]);
+            if(skinSelected == 2)
+                animation_button(resources.bee_skin,backgroundWidth /2 - 100, backgroundHeight / 2 - 40, 1.0f, resources.bee_skinA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[1]);
+            else if(skinSelected != 2)
+                    animation_button(resources.bee_skin_selected, backgroundWidth /2 - 100, backgroundHeight / 2 - 40, 1.0f, resources.bee_skin_selectedA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[1]);
+        }
+        //Locked Flappy Bird Skin !!
+        if(highest_score < 30 && dev_skins != 1){
+            animation_button(resources.flappy_bird_skin_locked1,backgroundWidth /2 + 200, backgroundHeight / 2 - 40, 1.0f, resources.flappy_bird_skin_locked2, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skinSelected);
+                    
+        }
+        else{
+            //Flappy Bird Skin Button animation
+            if(skinSelected == 1)
+                animation_button(resources.flappy_bird_skin,backgroundWidth /2 + 200, backgroundHeight / 2 - 40, 1.0f, resources.flappy_bird_skinA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[2]);
+            else if(skinSelected != 1)
+                animation_button(resources.flappy_bird_skin_selected,backgroundWidth /2 + 200, backgroundHeight / 2 - 40, 1.0f, resources.flappy_bird_skin_selectedA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[2]);
         }
         
-        //Flappy Bird Skin Button animation
-        animation_button(resources.flappy_bird,backgroundWidth /2 + 100, backgroundHeight / 2 - 40, 1.0f, resources.flappy_bird_flap, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[0]);
+        
+        //Bat Bird Skin Button animation
+        
+         if(skinSelected == 3 )
+               animation_button(resources.bat_skin,backgroundWidth /2 - 400, backgroundHeight / 2 - 40, 1.0f, resources.bat_skinA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[0]);
+            else if(skinSelected != 3)
+                animation_button(resources.bat_skin_selected,backgroundWidth /2 - 400, backgroundHeight / 2 - 40, 1.0f, resources.bat_skin_selectedA, 6, button_radius + 2.0f, 1, button_speed + 0.015f, Skins_hb, skins[0]);
         
         // Menu Button animation
         animation_button(resources.Menu_Button,backgroundWidth - 180, backgroundHeight - 190, 1.6f, resources.Menu_ButtonA, 0, button_radius + 2.0f, 1, button_speed + 0.015f, Menu_Button_hb);
@@ -261,13 +283,3 @@ void mainMenu(){
         
     }
 }
-/*
-
-struct skins{
-
-    int id;
-    Rectangle hb {0, 0, };
-
-}
-
-*/

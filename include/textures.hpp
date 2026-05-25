@@ -27,6 +27,12 @@ struct Resources{
     Texture2D flappy_bird_flap;
     Texture2D fb_flap;
     Texture2D fb;// fb = flappy bird
+    Texture2D flappy_bird_skin;
+    Texture2D flappy_bird_skinA;
+    Texture2D flappy_bird_skin_selected;
+    Texture2D flappy_bird_skin_selectedA;
+    Texture2D flappy_bird_skin_locked1;
+    Texture2D flappy_bird_skin_locked2;
     Texture2D bee;
     Texture2D bee_flap;
     Texture2D bee_skin;
@@ -35,6 +41,14 @@ struct Resources{
     Texture2D bee_skin_selectedA;
     Texture2D bee_skin_locked1;
     Texture2D bee_skin_locked2;
+    Texture2D bat;
+    Texture2D bat_flap;
+    Texture2D bat_skin;
+    Texture2D bat_skinA;
+    Texture2D bat_skin_selected;
+    Texture2D bat_skin_selectedA;
+    Texture2D bat_skin_locked1;
+    Texture2D bat_skin_locked2;
     Font novencento;
     Sound die;
     Sound flap;

@@ -73,32 +73,53 @@ void loadTextures(){
     resources.Options_ButtonA = LoadTexture("./resources/images/buttons/Options_ButtonA.png");  
     resources.Skins_Button = LoadTexture("./resources/images/buttons/Skins_Button.png");
     resources.Skins_ButtonA = LoadTexture("./resources/images/buttons/Skins_ButtonA.png");
+    resources.flappy_bird_skin = LoadTexture("./resources/images/flappy-bird/flappy_bird_skin.png");
+    resources.flappy_bird_skinA = LoadTexture("./resources/images/flappy-bird/flappy_birdskinA.png");
+    resources.flappy_bird_skin_selected = LoadTexture("./resources/images/flappy-bird/flappy_bird_skin_selected.png");
+    resources.flappy_bird_skin_selectedA = LoadTexture("./resources/images/flappy-bird/flappy_bird_skin_selectedA.png");
+    resources.flappy_bird_skin_locked1 = LoadTexture("./resources/images/flappy-bird/flappy_bird_skin_locked1.png");
+    resources.flappy_bird_skin_locked2 = LoadTexture("./resources/images/flappy-bird/flappy_bird_skin_locked2.png");
     resources.bee = LoadTexture("./resources/images/bee/bee.png");
     resources.bee_flap = LoadTexture("./resources/images/bee/bee_flaps.png");
-    resources.flappy_bird = LoadTexture("./resources/images/flappy-bird/flappy-bird.png");
-    resources.flappy_bird_flap = LoadTexture("./resources/images/flappy-bird/flappy-bird-flaps.png");
     resources.bee_skin = LoadTexture("./resources/images/bee/bee_skin.png");
     resources.bee_skinA = LoadTexture("./resources/images/bee/bee_skinA.png");
     resources.bee_skin_selected = LoadTexture("./resources/images/bee/bee_skin_selected.png");
     resources.bee_skin_selectedA = LoadTexture("./resources/images/bee/bee_skin_selectedA.png");
     resources.bee_skin_locked1 = LoadTexture("./resources/images/bee/bee_skin_locked1.png");
     resources.bee_skin_locked2 = LoadTexture("./resources/images/bee/bee_skin_locked2.png");
+    resources.bat = LoadTexture("./resources/images/bat/bat.png");
+    resources.bat_flap = LoadTexture("./resources/images/bat/batA.png");
+    resources.bat_skin = LoadTexture("./resources/images/bat/bat_skin.png");
+    resources.bat_skinA = LoadTexture("./resources/images/bat/bat_skinA.png");
+    resources.bat_skin_selected = LoadTexture("./resources/images/bat/bat_skin_selected.png");
+    resources.bat_skin_selectedA = LoadTexture("./resources/images/bat/bat_skin_selectedA.png");
+    resources.bat_skin_locked1 = LoadTexture("./resources/images/bat/bat_skin_locked1.png");
+    resources.bat_skin_locked2 = LoadTexture("./resources/images/bat/bat_skin_locked2.png");
+    
 
-    if(skinSelected == 1){ // green skin
-    resources.fb_flap=LoadTexture("./resources/images/flappy-bird/flappy-bird-flaps.png");
-    resources.pill1 =LoadTexture("./resources/images/flappy-bird/pillar-2.png");
+    if(skinSelected == 1){ // bird skin
+    resources.fb_flap = LoadTexture("./resources/images/flappy-bird/flappy-bird-flaps.png");
+    resources.pill1 = LoadTexture("./resources/images/flappy-bird/pillar-2.png");
     resources.fb = LoadTexture("./resources/images/flappy-bird/flappy-bird.png");// fb = flappy bird
-    resources.pill2 =LoadTexture("./resources/images/flappy-bird/pillar-1.png");
+    resources.pill2 = LoadTexture("./resources/images/flappy-bird/pillar-1.png");
     resources.bg = LoadTexture("./resources/images/background2.png");
     resources.bg_game = LoadTexture("./resources/images/background.png");
     }
     else if(skinSelected == 2){ // bee skin
     resources.fb = resources.bee;
     resources.fb_flap = resources.bee_flap;
-    resources.pill1 =LoadTexture("./resources/images/bee/branch-2.png");
-    resources.pill2 =LoadTexture("./resources/images/bee/branch-1.png");
-    resources.bg = LoadTexture("./resources/images/background2.png");
-    resources.bg_game = LoadTexture("./resources/images/background.png");
+    resources.pill1 = LoadTexture("./resources/images/bee/branch-2.png");
+    resources.pill2 = LoadTexture("./resources/images/bee/branch-1.png");
+    resources.bg = LoadTexture("./resources/images/forest2.png");
+    resources.bg_game = LoadTexture("./resources/images/forest.png");
+    }
+    else if(skinSelected == 3){ // bat skin
+    resources.fb = resources.bat;
+    resources.fb_flap = resources.bat_flap;
+    resources.pill1 = LoadTexture("./resources/images/bat/stalagmite.png");
+    resources.pill2 = LoadTexture("./resources/images/bat/stalactite.png");
+    resources.bg = LoadTexture("./resources/images/cave2.png");
+    resources.bg_game = LoadTexture("./resources/images/cave.png");
     }
     resources.novencento = LoadFontFromMemory(".ttf", fileData, fileSize, 40, 0, 0);
 }
